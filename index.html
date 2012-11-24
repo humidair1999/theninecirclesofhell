@@ -6,8 +6,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
+        <title>The Nine Circles of Hell: Front-End Development for Sharepoint</title>
+
+        <meta name="description" content="The Nine Circles of Hell: Front-End Development for Sharepoint, an ebook on the topic of front-end development using the Microsoft Sharepoint content platform.">
+        <meta name="author" content="J. Ky Marsh">
+
         <meta name="viewport" content="width=device-width">
 
         <style type="text/css">
@@ -20,18 +23,210 @@
             html,button,input,select,textarea{color:#222}body{font-size:1em;line-height:1.4}::-moz-selection{background:#b3d4fc;text-shadow:none}::selection{background:#b3d4fc;text-shadow:none}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}img{vertical-align:middle}fieldset{border:0;margin:0;padding:0}textarea{resize:vertical}.chromeframe{margin:.2em 0;background:#ccc;color:#000;padding:.2em 0}.ir{background-color:transparent;border:0;overflow:hidden;*text-indent:-9999px}.ir:before{content:"";display:block;width:0;height:100%}.hidden{display:none!important;visibility:hidden}.visuallyhidden{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.visuallyhidden.focusable:active,.visuallyhidden.focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}.invisible{visibility:hidden}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}.clearfix{*zoom:1}@media print{*{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important}a,a:visited{text-decoration:underline}a[href]:after{content:" (" attr(href) ")"}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100%!important}@page{margin:.5cm}p,h2,h3{orphans:3;widows:3}h2,h3{page-break-after:avoid}}
         </style>
 
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <style type="text/css">
+            header,
+            article,
+            section {
+                margin: 20px 0;
+            }
+
+            .container {
+                margin: 0 auto;
+                width: 600px;
+
+                border: 1px solid #000;
+            }
+
+            .centered {
+                text-align: center;
+            }
+        </style>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <div class="container">
+            <header class="centered">
+                <h1>The Nine Circles of Hell:</h1>
+                <h2>Front-End Development for Sharepoint</h2>
+                <h6><em>a quick-start guide</em></h6>
+
+                <h6>by J. Ky Marsh</h6>
+                <h6><a href="http://jkymarsh.com">jkymarsh.com</a></h6>
+            </header>
+
+            <article>
+                <h5>Copyright and Acknowledgments</h5>
+
+                <section>
+                    <strong>The Nine Circles of Hell: Front-End Development for Sharepoint</strong><br />
+                    <em>a quick-start guide</em><br />
+                    by J. Ky Marsh, Copyright &#169; 2012<br />
+                    <a href="http://jkymarsh.com">jkymarsh.com</a>
+                </section>
+
+                <section>
+                    Special thanks to the following parties:
+
+                    <ul>
+                        <li>
+                            The Avanade crew: Platini, Huy, Joe, Jesse, Jeff, Hoang, Ashraf, and Fehmina, for tolerating my endless slew of obnoxious questions and unbridled fury throughout the development cycle
+                        </li>
+                        <li>
+                            The Manifest Digital crew: Ryan, Peter, Clair, Jorin, Jeremy, Rob, and Chris, for the constant support and answers to my onslaught of questions
+                        </li>
+                        <li>
+                            My generous, selfless technical editors: Justin Kobel, Michael Donovan, and Tom Sears
+                        </li>
+                    </ul>
+
+                    <p>
+                        Personal thanks to Derek Wheelden and Neal Conrad for always being wonderful people to bounce ideas off when my brain is simply too exhausted to continue.
+                    </p>
+                </section>
+            </article>
+
+            <article>
+                <h5>Disclaimers and Other Nonsense</h5>
+
+                <p>
+                    This publication is intended as a useful quick-start guide for front-end developers delving into the realm of Sharepoint development. As such, a few assumptions will be made about you throughout the book:
+                </p>
+
+                <ol>
+                    <li>
+                        You’re a front-end developer (I know, I know) with a moderate to advanced level of understanding and experience with HTML, CSS, and JS, as well as common web toolkits/frameworks and technologies (text editors/IDEs, jQuery, AJAX, web servers; you get the drift)
+                    </li>
+                    <li>
+                        You’re at least somewhat familiar with the Microsoft stack, including Windows, IIS, .NET, and the Visual Studio IDE
+                    </li>
+                    <li>
+                        You have immediate access to a back-end .NET developer friend, acquaintance, or coworker who may be able to answer your myriad of stupid questions
+                    </li>
+                    <li>
+                        You have a formidable anger management problem
+                    </li>
+                    <li>
+                        You’re alright with the author of this book being rather foul-mouthed and temperamental
+                    </li>
+                </ol>
+
+                <p>
+                    If any of these assumptions are falsy in nature with regards to your person, you may consider putting this book down and attempting to remedy them. “But how?” you ask. I don’t fucking know. I’m just the author, okay?
+                </p>
+
+                <p>
+                    Otherwise, I hope you find this guide useful as it assists you along the path to Total Sharepoint Enlightenment™.
+                </p>
+
+                <p>
+                    As one could reasonably assume, though the information contained herein should be largely accurate and trustworthy, it is by no means comprehensive, and various aspects of front-end development for Sharepoint could very well be omitted. If you do happen to stumble across any information in this book that you feel should be corrected post-haste, please don’t hesitate to email me:
+                </p>
+
+                <div class="centered">
+                    <a href="mailto:jkymarsh@gmail.com">jkymarsh@gmail.com</a>
+                </div>
+
+                <p>
+                    I will thusly research the correction in question, and assuming it passes my rigorous, time-tested set of qualifications (read: “me lazily Googling for a few minutes”), I will amend this book and credit you somewhere in kind. Thanks in advance.
+                </p>
+            </article>
+
+            <article>
+                <h5>Table of Contents</h5>
+
+                <ol>
+                    <li>
+                        <h5><a href="#chapter01-title">First Circle: Limbo</a></h5>
+
+                        <ol>
+                            <li>
+                                <a href="#chapter01-part01">Introduction</a>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <h5><a href="#chapter02-title">Third Circle: Gluttony</a></h5>
+
+                        <ol>
+                            <li>
+                                <a href="#chapter02-part01">What is Sharepoint?</a>
+                            </li>
+                            <li>
+                                <a href="#chapter02-part02">Technical Details</a>
+                            </li>
+                            <li>
+                                <a href="#chapter02-part03">Glossary</a>
+                            </li>
+                            <li>
+                                <a href="#chapter02-part04">Front-end Structure</a>
+                            </li>
+                            <li>
+                                <a href="#chapter02-part05">Back-end Structure</a>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <h5><a href="#chapter03-title">Fifth Circle: Anger</a></h5>
+
+                        <ol>
+                            <li>
+                                <a href="#chapter03-part01">Front-end Issues: Filesystem/Summation</a>
+                            </li>
+                            <li>
+                                <a href="#chapter03-part02">Front-end Issues: HTML</a>
+                            </li>
+                            <li>
+                                <a href="#chapter03-part03">Front-end Issues: CSS</a>
+                            </li>
+                            <li>
+                                <a href="#chapter03-part04">Front-end Issues: JS</a>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <h5><a href="#chapter04-title">Sixth Circle: Heresy</a></h5>
+
+                        <ol>
+                            <li>
+                                <a href="#chapter04-part01">Front-end Tips & Tricks: Filesystem/Summation</a>
+                            </li>
+                            <li>
+                                <a href="#chapter04-part02">Front-end Tips & Tricks: HTML</a>
+                            </li>
+                            <li>
+                                <a href="#chapter04-part03">Front-end Tips & Tricks: CSS</a>
+                            </li>
+                            <li>
+                                <a href="#chapter04-part04">Front-end Tips & Tricks: JS</a>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <h5><a href="#chapter05-title">Seventh Circle: Violence</a></h5>
+
+                        <ol>
+                            <li>
+                                <a href="#chapter05-part01">Conclusion & Summary</a>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <h5><a href="#chapter06-title">About the Author</a></h5>
+                    </li>
+                </ol>
+            </article>
+        </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-
-        <script src="js/main.js"></script>
     </body>
 </html>
