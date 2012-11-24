@@ -27,18 +27,38 @@
             header,
             article,
             section {
-                margin: 20px 0;
+                margin: 60px 0;
             }
 
             .container {
                 margin: 0 auto;
-                width: 600px;
+                max-width: 600px;
 
-                border: 1px solid #000;
+                border: 0px solid #000;
             }
 
             .centered {
                 text-align: center;
+            }
+
+            .callout {
+                background: yellow;
+            }
+
+            .warning {
+                margin: 10px;
+                padding: 12px;
+
+                color: #fff;
+
+                background: red;
+
+                text-shadow: 2px 2px 2px #000;
+
+                -webkit-border-radius: 4px;
+                border-radius: 4px;
+
+                -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
             }
         </style>
 
@@ -50,6 +70,8 @@
         <![endif]-->
 
         <div class="container">
+            <div class="warning centered">This book is a work in progress. Please be patient while I whip it into shape. Also, please feel free to contribute to its development or donate.</div>
+
             <header class="centered">
                 <h1>The Nine Circles of Hell:</h1>
                 <h2>Front-End Development for Sharepoint</h2>
@@ -224,6 +246,99 @@
                         <h5><a href="#chapter06-title">About the Author</a></h5>
                     </li>
                 </ol>
+            </article>
+
+            <article>
+                <header class="centered">
+                    <h3>First Circle</h3>
+                    <h4>Limbo</h4>
+
+                    <h6><a href="#">back to top</a></h6>
+                </header>
+
+                <section>
+                    <h5>Introduction</h5>
+
+                    <p>
+                        My condolences.
+                    </p>
+
+                    <p>
+                        If you’re reading this book, it can logically be assumed that you’ve been tasked with completing a project that involves working with Sharepoint; in fact, it’s probably safe to make the assumption that you’re a front-end developer who stumbled upon this text after hysterically Googling “MICROSOFT SHAREPOINT SOME1 PLS HELP,” tears streaming down your pudgy cheeks, fat fists wildly bashing the keyboard of your MacBook Pro.
+                    </p>
+
+                    <p>
+                        All is not lost, my friend. I found myself in exactly the same position some time ago; well, aside from the crying, anyway. What are you, some kind of wuss? Christ.
+                    </p>
+
+                    <p>
+                        The fact of the matter is that up-to-date, clear-cut information on front-end development for Sharepoint is frighteningly difficult to find. Sharepoint itself is chock-full of bad practices and front-end code taboos that will leave you scratching your head (and potentially crying, since you’ve apparently shown a propensity for doing that, Nancy).
+                    </p>
+
+                    <p>
+                        Furthermore, Sharepoint’s default front-end code (that is, the HTML, CSS, and JS that are used by default within a fresh install of Sharepoint) is so horrific that you’ll likely begin immediately assessing how to rewrite or overhaul the existing code in a desperate attempt to bring it in line with modern web development standards.
+                    </p>
+
+                    <p>
+                        Don’t panic. I’m here to help.
+                    </p>
+
+                    <p>
+                        This quick-start guide was written to assist you, the mid- to senior-level front-end developer, better understand how Sharepoint is constructed, what its weak points are, and how to develop for it more intelligently and more quickly. We’ll also walk through common vocabulary used during Sharepoint development. Hell, I’ll even be so kind as to give you a whole truckload of tips and tricks for developing in a more agile manner, and with considerably less mind-numbing agony.
+                    </p>
+
+                    <p>
+                        I’m a really, really nice guy.
+                    </p>
+
+                    <p>
+                        First things first, let’s have a short Q-and-A session to clear a few things up:
+                    </p>
+
+                    <dl>
+                        <dt>
+                            What version(s) of Sharepoint does this book cover?
+                        </dt>
+                        <dd>
+                            Sharepoint 2010. Certain sections may also apply to previous versions, but this is merely coincidence; this book was written as a direct result of working on an extensive Sharepoint 2010 project.
+                        </dd>
+
+                        <dt>
+                            Why Dante’s <strong>Inferno</strong>?
+                        </dt>
+                        <dd>
+                            Because Sharepoint, and Sharepoint development, are the closest approximations to Hell that we’ve yet achieved as humans.
+                        </dd>
+
+                        <dt>
+                            Why aren’t all nine circles of Hell represented?
+                        </dt>
+                        <dd>
+                            I couldn’t be bothered to write that many chapters. Trust me, after a few dozen pages of my babbling, you’ll be thankful.
+                        </dd>
+
+                        <dt>
+                            Why don’t you capitalize “SharePoint” or “JavaScript” properly?
+                        </dt>
+                        <dd>
+                            I can just barely summon the willpower to use punctuation. As such, I limit myself to one capital letter per word. This does not include acronyms. Also, shut up.
+                        </dd>
+
+                        <dt>
+                            Do the certain circles of hell correspond to particular aspects of Sharepoint development in some meaningful manner?
+                        </dt>
+                        <dd>
+                            What are you, some sort of literary critic? Door’s that way, egghead.
+                        </dd>
+
+                        <dt>
+                            Who did the artwork for this book?
+                        </dt>
+                        <dd>
+                            TODO
+                        </dd>
+                    </dl>
+                </section>
             </article>
         </div>
 
