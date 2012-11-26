@@ -60,6 +60,14 @@
 
                 -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
             }
+
+            .subtle {
+                background: lightgray;
+            }
+
+            .no-list {
+                list-style: none;
+            }
         </style>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -357,7 +365,7 @@
                     </p>
 
                     <p>
-                        Sharepoint is a web application platform developed by Microsoft.# Though you’ll find a wide array of explanations as to what Sharepoint is, it could most accurately be described as “a terrifying, monolithic CMS on crack.” It’s most often used as an intranet site for businesses of all shapes and sizes, offering a range of features:
+                        Sharepoint is a web application platform developed by Microsoft.<sup><a href="#footnote-01-ft" id="footnote-01-pl">1</a></sup> Though you’ll find a wide array of explanations as to what Sharepoint is, it could most accurately be described as “a terrifying, monolithic CMS on crack.” It’s most often used as an intranet site for businesses of all shapes and sizes, offering a range of features:
                     </p>
 
                     <ul>
@@ -370,7 +378,7 @@
                     </ul>
 
                     <p>
-                        Microsoft’s tagline for Sharepoint is “Microsoft SharePoint 2010 makes it easier for people to work together.”# Conversely, my personal tagline for Sharepoint is the soothing sound of me violently smashing my laptop with a cinder block while my head rotates three-hundred-and-sixty degrees and blood spouts from my eyes. I don’t think I’ll be getting hired by Microsoft’s marketing department any time soon, and I should probably see a doctor.
+                        Microsoft’s tagline for Sharepoint is “Microsoft SharePoint 2010 makes it easier for people to work together.”<sup><a href="#footnote-02-ft" id="footnote-02-pl">2</a></sup> Conversely, my personal tagline for Sharepoint is the soothing sound of me violently smashing my laptop with a cinder block while my head rotates three-hundred-and-sixty degrees and blood spouts from my eyes. I don’t think I’ll be getting hired by Microsoft’s marketing department any time soon, and I should probably see a doctor.
                     </p>
 
                     <p>
@@ -379,6 +387,439 @@
 
                     <p>
                         If you’re familiar with web development using any other CMS or collaborative web application platform, such as Wordpress, Drupal, Umbraco, DotNetNuke, Magento, and so on, you’ll be able to grasp Sharepoint conceptually without too much difficulty. However, given its sheer size and complexity, Sharepoint poses a rather interesting set of problems and barriers when it comes to both development and use.
+                    </p>
+
+                    <ol class="subtle no-list">
+                        <li id="footnote-01-ft">
+                            1. <a href="http://en.wikipedia.org/wiki/Microsoft_SharePoint" target="_blank">http://en.wikipedia.org/wiki/Microsoft_SharePoint</a> <sup><a href="#footnote-01-pl" title="back to article">back to article ↑</a></sup>
+                        </li>
+                        <li id="footnote-02-ft">
+                            2. <a href="http://sharepoint.microsoft.com/en-us/product/capabilities/Pages/default.aspx" target="_blank">http://sharepoint.microsoft.com/en-us/product/capabilities/Pages/default.aspx</a> <sup><a href="#footnote-02-pl" title="back to article">back to article ↑</a></sup>
+                        </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h5>Technical Details</h5>
+
+                    <p>
+                        As mentioned, Sharepoint is a web application platform developed by Microsoft. As one could reasonably presume, this means that Sharepoint runs on the Microsoft stack; that is, the tech stack comprised of the following components:
+                    </p>
+
+                    <ul>
+                        <li>Microsoft Windows Server 2008 (64-bit)</li>
+                        <li>ASP.NET (3.5, to be exact)</li>
+                        <li>IIS (7.0 or greater)</li>
+                        <li>Microsoft SQL Server 2008</li>
+                    </ul>
+
+                    <p>
+                        Older versions of some parts of this stack may also be supported, as well as SQL Server Express, but the above list tends to be the most common configuration.
+                    </p>
+
+                    <p>
+                        Additionally, browser support tends to be a little spotty. Corporations tend to be the most common adopters of Sharepoint, and as many of these organizations explicitly utilize Windows machines, it can be assumed that Internet Explorer will generally be the most common browser used to access the Sharepoint site. As far as browser support goes:<sup><a href="#footnote-03-ft" id="footnote-03-pl">3</a></sup>
+                    </p>
+
+                    <ul>
+                        <li>Internet Explorer 7 and 8 are fully supported (sans caveats to be mentioned later)</li>
+                        <li>Internet Explorer 6 is not supported</li>
+                        <li>Internet Explorer 9 must be used in compatibility mode</li>
+                        <li>Firefox, Chrome, and Safari are all currently supported</li>
+                    </ul>
+
+                    <p>
+                        As a general rule, your site must look great and function perfectly in IE7/8. Companies often approve Sharepoint projects with the assumption that all of their employees will access the site using IE, and as such, modern browsers take a backseat to IE as far as prioritizing a finished, polished site goes. Given appropriate time, support for modern browsers should of course be a priority as well, but IE support should top the list. Additionally, should you require troubleshooting by Microsoft themselves for any reason (in particular, if you’re using Sharepoint Online), they’ll expect you to be using IE throughout the troubleshooting process. It’s a necessary evil.
+                    </p>
+
+                    <p>
+                        Sharepoint is available in three separate versions: Sharepoint Foundation, Sharepoint Standard, and Sharepoint Enterprise. In true Microsoft fashion, each successive version provides more capability than the last, adding new features and additional integration with other Microsoft products. Sharepoint Foundation is free, while both Standard and Enterprise possess the ability to make your wallet shriek in terror.
+                    </p>
+
+                    <p>
+                        A Sharepoint site or application is comprised of a handful of components:<sup><a href="#footnote-04-ft" id="footnote-04-pl">4</a></sup>
+                    </p>
+
+                    <dl>
+                        <dt>
+                            Lists,
+                        </dt>
+                        <dd>
+                            which are collections of pieces of information. These could be lists of web links, news articles, users, or anything else you might logically find in a database or datastore
+                        </dd>
+
+                        <dt>
+                            Libraries,
+                        </dt>
+                        <dd>
+                            which are similar to lists in nature, but can also contain files that can be opened directly in Windows or Microsoft Office applications
+                        </dd>
+
+                        <dt>
+                            Web parts,
+                        </dt>
+                        <dd>
+                            which are UI widgets that can be added to and removed from pages
+                        </dd>
+
+                        <dt>
+                            Pages,
+                        </dt>
+                        <dd>
+                            which can take the form of wiki pages, publishing pages, or web part pages
+                        </dd>
+
+                        <dt>
+                            Sites,
+                        </dt>
+                        <dd>
+                            which are collections of pages, lists, and/or libraries
+                        </dd>
+
+                        <dt>
+                            Search sites,
+                        </dt>
+                        <dd>
+                            which are sites that allow access to Sharepoint’s search engine in order to find content or users
+                        </dd>
+                    </dl>
+
+                    <p>
+                        A typical Sharepoint application may contain many sites and/or search sites, which may in turn contain many sub-sites. It can all become quite a behemoth, as you can likely imagine. Add to this the fact that users of the Sharepoint application may be able to create their own sub-sites, and you begin to see just how enormous the sheer scope of a Sharepoint application could become, especially for a larger corporation with thousands of employees.
+                    </p>
+
+                    <p>
+                        In general, a single Sharepoint site (of which there could be many within the whole application, remember) is composited in the following manner:
+                    </p>
+
+                    <div class="centered">
+                        <span>List/Library > Web Part > Page > Site/Sub-site</span>
+                    </div>
+
+                    <p>
+                        That is, a list/library full of data is fed into a web part, which displays that data on a page, which is a portion of an overall site or sub-site. Phew!
+                    </p>
+
+                    <p>
+                        If you’ll recall, I mentioned that Sharepoint does bear some similarities to other CMSes you might be familiar with; for example, you’ve probably grasped that this flow of information is pretty similar to the way a CMS like Wordpress would display data via a widget that you’ve placed on the page. If it weren’t for Microsoft having some insatiable urge to give things convoluted names like “web part” and “list/library” instead of “widget” and “database/datastore,” you probably would have grasped that even more quickly. Thanks for nothing, Microsoft. Unfortunately, you’ll find that’s a recurring trend within Sharepoint; Microsoft loves to rename things that are already commonly-understood within the web development community. Don’t worry, there’s a glossary coming up to address just that.
+                    </p>
+
+                    <p>
+                        Okay, okay, so they’re not ALWAYS totally in the wrong. Technically, lists and libraries don’t have the same capabilities as databases, despite their contents being stored via SQL Server. Their capabilities and differences are a bit outside the scope of this book, but if you’re interested, you can find more information here:
+                    </p>
+
+                    <a href="http://chriswoodill.blogspot.com/2009/05/sharepoint-is-not-database.html" target="_blank">http://chriswoodill.blogspot.com/2009/05/sharepoint-is-not-database.html</a>
+
+                    <p>
+                        In an extremely general sense, that’s a brief overview of Sharepoint and how a Sharepoint application or intranet site would be constructed. We’ll expand more upon the organization of both the front- and back-ends shortly, but if you’re looking for an in-depth technical overview of how Sharepoint interfaces with IIS and/or SQL Server, you may want to do some outside research at this point.
+                    </p>
+
+                    <ol class="subtle no-list">
+                        <li id="footnote-03-ft">
+                            3. <a href="http://en.wikipedia.org/wiki/Microsoft_SharePoint#Supported_web_browsers" target="_blank">http://en.wikipedia.org/wiki/Microsoft_SharePoint#Supported_web_browsers</a> <sup><a href="#footnote-03-pl" title="back to article">back to article ↑</a></sup>
+                        </li>
+                        <li id="footnote-04-ft">
+                            4. <a href="http://en.wikipedia.org/wiki/Microsoft_SharePoint#Core_platform_functionality" target="_blank">http://en.wikipedia.org/wiki/Microsoft_SharePoint#Core_platform_functionality</a> <sup><a href="#footnote-04-pl" title="back to article">back to article ↑</a></sup>
+                        </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h5>Glossary</h5>
+
+                    <p>
+                        Deep in the bowels of hellfire and desperation that comprise Sharepoint, things are not always what they seem. Terminology that was once wholly familiar to you in an average web development environment may have a completely different meaning amongst the Microsoft stack. Even worse, there’s a smattering of new vocabulary that you’ve likely never heard before, especially if you’re coming from a background in another tech stack. Understanding the lingo of Sharepoint development is a huge part of being able to communicate with the back-end devs, so let’s take a look at a list of some of the terms you might come across.
+                    </p>
+
+                    <p>
+                        It should be noted that this is only a partial list of Sharepoint terms; realistically, there are dozens, or even hundreds, of unfamiliar terms you might hear when working on a Sharepoint project. In my experience, these are some of the most common terms used on an everyday basis. For a more complete selection of Sharepoint terminology, I highly recommend scouring the following resources:
+                    </p>
+
+                    <ul class="no-list">
+                        <li>
+                            <a href="http://www.rharbridge.com/?page_id=60" target="_blank">http://www.rharbridge.com/?page_id=60</a>
+                        </li>
+                        <li>
+                            <a href="https://sharepoint.missouri.edu/wiki/Wiki%20Pages/SharePoint%20Terminology.aspx" target="_blank">https://sharepoint.missouri.edu/wiki/Wiki%20Pages/SharePoint%20Terminology.aspx</a>
+                        </li>
+                        <li>
+                            <a href="http://msdn.microsoft.com/en-us/library/ee556558.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/ee556558.aspx</a>
+                        </li>
+                    </ul>
+
+                    <dl>
+                        <dt>.NET</dt>
+                        <dd>
+                            A software framework that runs on Windows. .NET applications utilize the Common Language Runtime virtual machine. A variety of programming languages may be used with the .NET framework, but C# tends to be the most common.
+                        </dd>
+
+                        <dt>AJAX</dt>
+                        <dd>
+                            In the context of Sharepoint, developers who refer to “AJAX” are likely referring to ASP.NET AJAX, a .NET library built to allow .NET developers to more easily integrate asynchronous calls into their web applications. Often, when you explain to .NET developers that “AJAX” simply describes a technique for building asynchronous web applications, they’ll look at you weird, only having been exposed to the .NET library. Resist your urge to punch them and call them mean names.
+                        </dd>
+
+                        <dt>Application Pool</dt>
+                        <dd>
+                            A grouping of one or more web applications served by an IIS worker process.
+                        </dd>
+
+                        <dt>Build</dt>
+                        <dd>
+                            The process of preparing an application for deployment. Unlike simply compiling, building will also copy necessary files, run unit tests (for Sharepoint? As if!), and other intermediary steps prior to deployment. <span class="callout">TODO: PIC</span>
+                        </dd>
+
+                        <dt>CAF/MSOCAF</dt>
+                        <dd>
+                            Microsoft Sharepoint Online Code Analysis Framework. As you could probably infer, this is a tool used to analyze your code and assess how hard it sucks. Code analysis via the CAF tool is required for all Sharepoint sites intended to be deployed to Sharepoint Online.
+                        </dd>
+
+                        <dt>CAML</dt>
+                        <dd>
+                            Collaborative Application Markup Language. CAML is an XML-based language used to query items stored within lists and libraries.
+                        </dd>
+
+                        <dt>Central Administration</dt>
+                        <dd>
+                            A website where all Sharepoint sites located on a server or farm can be administered. <span class="callout">TODO: PIC</span>
+                        </dd>
+
+                        <dt>Deploy</dt>
+                        <dd>
+                            The necessary set of steps required to install your Sharepoint application on a suitable Sharepoint host environment. This is typically the follow-up step after building your solution. <span class="callout">TODO: PIC</span>
+                        </dd>
+
+                        <dt>Farm</dt>
+                        <dd>
+                            A server farm; one or more Sharepoint server(s), combined with one or more SQL Server(s) coming together to serve one Sharepoint solution.
+                        </dd>
+
+                        <dt>Features</dt>
+                        <dd>
+                            A package or collection of Sharepoint services that can be activated or deactivated. The features possessed by your Sharepoint site will typically vary from project to project and team to team.
+                        </dd>
+
+                        <dt>Ghosted/Ghostable</dt>
+                        <dd>
+                            An item or document is said to be “ghosted” when its content is stored in a location other than a content database. The location of this item will typically be resolved by IIS at runtime.
+                        </dd>
+
+                        <dt>Hive</dt>
+                        <dd>
+                            As one of my former projectmates so eloquently put it, the “hive” is where Sharepoint “stores its stuff.” These are the physical files and directories required for Sharepoint to function properly. The location of the hive is deep within the Windows filesystem, and we’ll be exploring it ad nauseam in an upcoming chapter. <span class="callout">TODO: PIC</span>
+                        </dd>
+
+                        <dt>IIS</dt>
+                        <dd>
+                            Internet Information Services. IIS is the monolithic web server used for .NET applications.
+                        </dd>
+
+                        <dt>Library</dt>
+                        <dd>
+                            A location on a Sharepoint site where users can create and collaborate on files with other team members. There are a handful of types of different libraries, none of which are interesting enough to cover in-depth here. You get the concept.
+                        </dd>
+
+                        <dt>List</dt>
+                        <dd>
+                            A customizable container that stores list items comprised of one or more fields.
+                        </dd>
+
+                        <dt>Master Page</dt>
+                        <dd>
+                            Web page templates that other pages can inherit from. Same concept as a page that contains “includes” in PHP, or “partials” in Ruby. A master page will generally contain your site’s header, footer, navigation, and placeholders for individual page content.
+                        </dd>
+
+                        <dt>Metadata</dt>
+                        <dd>
+                            Data about data. The “Inception” of data. Whatever.
+                        </dd>
+
+                        <dt>OOTB</dt>
+                        <dd>
+                            “Out of the Box.” A term or acronym used to describe default, vanilla Sharepoint web parts or widgets. If a web part requires customization, it’s no longer an “out of the box” web part, but rather, a “custom web part.”
+                        </dd>
+
+                        <dt>Office 365</dt>
+                        <dd>
+                            A Microsoft-hosted, cloud-computing variant of the Microsoft Office suite of applications. Sharepoint applications often provide integration with Office 365 web applications for document creation and editing.
+                        </dd>
+
+                        <dt>Page</dt>
+                        <dd>
+                            Either a rendered page consisting of front-end code, or a single page within a Sharepoint application. You figure it out.
+                        </dd>
+
+                        <dt>Page Layout</dt>
+                        <dd>
+                            A dynamic web template. Page layouts are most commonly used in conjunction with master pages, to provide space on a page to place content, such as web parts or other widgets.
+                        </dd>
+
+                        <dt>Provisioning</dt>
+                        <dd>
+                            The act of creating and/or deploying a site, application, or feature.
+                        </dd>
+
+                        <dt>Ribbon</dt>
+                        <dd>
+                            A universal UI command interface, much like the “ribbon” interface showcased in modern versions of Microsoft Office software. The Sharepoint ribbon displays context-appropriate commands to the user, and can be heavily restyled to match the branding of a Sharepoint site. <span class="callout">TODO: PIC</span>
+                        </dd>
+
+                        <dt>Sharepoint Designer</dt>
+                        <dd>
+                            An HTML editor and visual tool used for creating and modifying Sharepoint pages and page layouts. It is awful. Imagine Dreamweaver for Sharepoint. Unfortunately, it does provide some useful tools for modifying Sharepoint files and directories, so you’ll likely be forced to use it on occasion. Otherwise, I recommend avoiding it.
+                        </dd>
+
+                        <dt>Sharepoint Online</dt>
+                        <dd>
+                            Microsoft-hosted Sharepoint offerings. Sharepoint can either be self-hosted independently, or hosted by Microsoft as part of Sharepoint Online. When deployed to Sharepoint Online, vigorous code analyses and performance tests are undergone to ensure your application meets certain Microsoft standards.
+                        </dd>
+
+                        <dt>Site</dt>
+                        <dd>
+                            This could refer to either a single sub-site within a Sharepoint solution, or a Sharepoint site; that is, a website you navigate to by typing in a specific URL.
+                        </dd>
+
+                        <dt>Site Actions</dt>
+                        <dd>
+                            A portion of the ribbon interface that exposes a variety of administrative functions to the user or administrator. <span class="callout">TODO: PIC</span>
+                        </dd>
+
+                        <dt>Site Collection</dt>
+                        <dd>
+                            A set of websites that are in the same content database, have the same owner, and share administrative settings. A Sharepoint application may contain many site collections.
+                        </dd>
+
+                        <dt>Solution</dt>
+                        <dd>
+                            A structure for organizing projects in Visual Studio, the IDE of choice for Sharepoint development. A solution maintains information about the state of a project.
+                        </dd>
+
+                        <dt>Style Library</dt>
+                        <dd>
+                            A document library where front-end assets (CSS, JS, images) are stored. The style library is only accessible via the top-level site collection site. The style library effectively acts as a database in which all of your front-end assets are stored.
+                        </dd>
+
+                        <dt>TFS</dt>
+                        <dd>
+                            Team Foundation Server, Microsoft’s source control system. TFS acts as a centralized version control system, rather than decentralized. TFS also offers project tracking and management capabilities, but we don’t care about those at all.
+                        </dd>
+
+                        <dt>Taxonomy</dt>
+                        <dd>
+                            Taxonomy defines how Sharepoint’s information is defined, searched, found, and reported.
+                        </dd>
+
+                        <dt>Timer Job</dt>
+                        <dd>
+                            A recurring background process that’s managed by Sharepoint. This would alternatively be known as a “cron job” to any normal human being. These are processes that are scheduled to run at predefined intervals.
+                        </dd>
+
+                        <dt>Web Part</dt>
+                        <dd>
+                            A reusable component that contains or generates any variety of code or data. Web parts are similar in nature and appearance to “widgets” in many other frameworks and CMSes.
+                        </dd>
+
+                        <dt>Web Part Zone</dt>
+                        <dd>
+                            A section of a Sharepoint page layout that may be used to contain one or more web parts by dropping them into the zone. The zone itself controls the organization of the web parts it contains.
+                        </dd>
+
+                        <dt>Workflow</dt>
+                        <dd>
+                            The automation of a process, such as moving items or documents through a sequence of actions or tasks.
+                        </dd>
+                    </dl>
+
+                    <p>
+                        Again, this is by no means a comprehensive list of all Sharepoint terminology you may encounter on any given project. Instead, this is a “crash course-”esque look at a slew of terms you may run into, due to their sheer pervasiveness across many different types of Sharepoint projects. Hopefully this list has cleared up some confusion for you, and will reduce the number of blank stares you give back-end developers when they toss around terms like “hive” and “provisioning.”
+                    </p>
+                </section>
+
+                <section>
+                    <h5>Front-end Structure</h5>
+
+                    <p>
+                        Structurally, Sharepoint is probably fairly similar to other CMSes you’ve used in the past: content is drawn from some sort of database and fed to the front-end, and may be displayed with widgets, page sections, or other page elements. In Sharepoint’s case, the content will be coming from a list or library, and will generally be presented via a web part.
+                    </p>
+
+                    <p>
+                        User-facing pages may also consist of wiki pages or publishing pages, which may or may not contain web parts and web part zones. These pages could be used to display content such as news articles, user profiles, wiki articles (duh), and so on.
+                    </p>
+
+                    <p>
+                        Additionally, all system and administrative pages will pass through your front-end as well. Sharepoint’s dizzying array of system pages can make use of your master page(s), meaning you’re able to brand the back-end of your Sharepoint site in addition to the user-facing front-end, if you’re some kind of masochist.
+                    </p>
+
+                    <p>
+                        Sharepoint is based on the ASP.NET Web Forms programming model. This means that the pages that comprise the front-end of a Sharepoint site are created using an amalgamation of HTML, server controls, and server code. When users request a page, the server controls and code are compiled and executed, producing a page full of hideous rendered HTML.<sup><a href="#footnote-05-ft" id="footnote-05-pl">5</a></sup> If you’re familiar with .NET web development, Sharepoint’s development model will be familiar to you, if you have any experience using the Web Forms model.
+                    </p>
+
+                    <p>
+                        Unfortunately, the Web Forms programming model is considered outdated these days, and has been superceded by a programming model known as ASP.NET MVC. The Web Forms model was highly criticized for producing ugly spaghetti code, which was a result of server controls and code being directly intermingled with HTML on front-end pages. Think back into the distant past, when you wrote HTML forms by writing PHP directly in .php page files, tossing PHP code into HTML tag attributes without a care. Remember how horrible that was? Yeah, Sharepoint still uses that programming model.
+                    </p>
+
+                    <p>
+                        As of the time of this book’s writing, Sharepoint still does not utilize an MVC programming model, and Microsoft has no imminent plans to convert it as such. There are workarounds to be able to use the wonderful Razor view engine in tandem with Sharepoint, as well as what’s referred to as an “MVP” (Model View Presenter) programming model, but you’re on your own with those things. Happy Googling.
+                    </p>
+
+                    <p>
+                        What does Sharepoint’s old-school programming model and structure mean for you, my valiant front-end developer? Well, primarily that your HTML files are going to exhibit a few key traits:
+                    </p>
+
+                    <ul>
+                        <li>
+                            They’ll be riddled with server code, such as:<br />
+                            &#60;%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+                        </li>
+                        <li>
+                            They’ll be riddled with Sharepoint controls, such as:<br />
+                            &#60;SharePoint:CssRegistration Name="/Style Library/SomeSite/css/960.css" runat="server" After="corev4.css"/></li>
+                        <li>
+                            They’ll be riddled with ASP.NET controls, such as:<br />
+                            &#60;asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat="server" />
+                        </li>
+                        <li>
+                            They may contain inline CSS
+                        </li>
+                        <li>
+                            They may contain inline JS
+                        </li>
+                    </ul>
+
+                    <p>
+                        Yeah, it’s not a particularly pretty situation. The fact that Sharepoint’s default master page, v4.master, is over 600 lines long is a pretty decent indicator that the code bloat’s attending this party in full force. Additionally, Sharepoint’s default CSS file, corev4.css, clocks in at a monolithic 7400 lines of code. It’s probably best that you not even look at these files yourself right now; save the trauma for later.
+                    </p>
+
+                    <p>
+                        We’ll get into the good, bad, and ugly of Sharepoint’s front-end in upcoming chapters, but for now, that’s a pretty decent rundown of what you’ll be looking at on an average Sharepoint project. Lots of code. A whole shitload of code. Most of it terrifying.
+                    </p>
+
+                    <ol class="subtle no-list">
+                        <li id="footnote-05-ft">
+                            5. <a href="http://www.asp.net/web-forms/what-is-web-forms" target="_blank">http://www.asp.net/web-forms/what-is-web-forms</a> <sup><a href="#footnote-05-pl" title="back to article">back to article ↑</a></sup>
+                        </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h5>Back-end Structure</h5>
+
+                    <p>
+                        “Yeah, yeah, whatever!” you shout obnoxiously, rudely interrupting my poignant critique of Sharepoint’s front-end. “But what about the back-end?!” Well, you’re sort of out of luck there. Admittedly, I don’t know much about how Sharepoint’s back-end actually functions.
+                    </p>
+
+                    <p>
+                        Luckily, Stack Overflow is here to help. After a concise search query, here are some of my personal favorite results after asking “How does Sharepoint work?”
+                    </p>
+
+                    <ul>
+                        <li>“Occasionally.”</li>
+                        <li>“On Error Resume Next.”</li>
+                        <li>“Sharepoint itself is written in a unique syntax, made entirely from ‘Unexpected Error’ exceptions.”</li>
+                        <li>“Automagically.”</li>
+                    </ul>
+
+                    <p>
+                        Jokes aside, the “Technical Details” portion of this chapter was probably the most elaborate rundown of Sharepoint’s back-end that you’ll find within this book. Assuming you have a knowledgeable .NET developer on your team, they likely have a more in-depth understanding of how Sharepoint actually operates. Probe them. Not literally, you deviant.
                     </p>
                 </section>
             </article>
