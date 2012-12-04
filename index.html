@@ -821,8 +821,471 @@
                     </ul>
 
                     <p>
-                        Jokes aside, the “Technical Details” portion of this chapter was probably the most elaborate rundown of Sharepoint’s back-end that you’ll find within this book. Assuming you have a knowledgeable .NET developer on your team, they likely have a more in-depth understanding of how Sharepoint actually operates. Probe them. Not literally, you deviant.
+                        Jokes aside, the “Technical Details” portion of this chapter was probably the most elaborate rundown of Sharepoint’s back-end that you’ll find within this book. Assuming you have a knowledgeable .NET developer on your team, they likely have a more in-depth understanding of how Sharepoint actually operates. Probe them.
                     </p>
+
+                    <p>
+                        ...Not literally, you deviant.
+                    </p>
+                </section>
+            </article>
+
+            <article>
+                <header class="centered">
+                    <h3>Fifth Circle</h3>
+                    <h4>Anger</h4>
+
+                    <h6><a href="#">back to top</a></h6>
+                </header>
+
+                <section>
+                    <p>
+                        Ahh, finally, the meat. This is the moment you’ve been waiting for your entire life. It all comes down to this. Down to the wire. D-Day. You get the point.
+                    </p>
+
+                    <p>
+                        In keeping with the theme of this book, you’ll notice this particular chapter is represented by the fifth circle of Hell: Anger. Oh, what an adequate circle it is, as you’ll find out.
+                    </p>
+
+                    <p>
+                        This chapter will cover the breadth of infuriating inconsistencies, quirks, and plain-ol’ “dumb shit” that comprise Sharepoint’s front-end. I’ll be covering all of these particular things throughout this chapter, and some remedies to them will be provided in the next chapter. Some have asked, “why wouldn’t you give the problem-and-solution together in the same chapter?” Sure, that may have made more sense layout-wise, but come on, the “circles of Hell” imagery is just too good to pass up. You’ll get over it.
+                    </p>
+                </section>
+
+                <section>
+                    <h5>Front-end Issues: Filesystem/Summation</h5>
+
+                    <div class="centered">
+                        <em>Windows Virtual Machines</em>
+                    </div>
+
+                    <p>
+                        This one may or may not apply to you, depending on your team and particular project. <span class="callout">Oftentimes, Sharepoint (and .NET in general) developers will all develop using a virtual machine image, rather than local installs of Sharepoint on each developer’s machine. There are a few reasons this is done:</span>
+                    </p>
+
+                    <ul>
+                        <li>
+                            Ensure all developers are using identical installs of necessary software
+                        </li>
+                        <li>
+                            Prevents against having to reinstall an entire Windows Server system if a dev’s computer bites the dust; just toss the VM image on a removable drive
+                        </li>
+                        <li>
+                            Easier to troubleshoot a single machine image than numerous devs’ machines if something goes awry
+                        </li>
+                    </ul>
+
+                    <p>
+                        Unfortunately, the downside to using a VM is the fact that the Windows Server install is incredibly resource-intensive: SQL Server will hog memory like a jerk, and Sharepoint’s a hefty beast as well. This means that unless your system is a veritable monster, your VM may CRAWL during development.
+                    </p>
+
+                    <p>
+                        I’m defying my own “I’m not giving you any tips or tricks ‘til the next chapter!” rule for this, and only this: Make sure your development machine is up to snuff. At least a dual-core CPU and 8 gigs of RAM. The VM image will likely be at least 50 gigs in size, so a suitable hard drive should be obtained as well. In whatever software you use for virtualization (likely VMWare or Virtualbox), dedicate as many resources as humanly possible to the Windows Server VM. Your machine (and your blood pressure) will thank you.
+                    </p>
+
+                    <div class="centered">
+                        <em class="callout">The Hive</em>
+                    </div>
+
+                    <p>
+                        As mentioned way back in the glossary, the “Hive” is the location on a Windows filesystem where Sharepoint “keeps all its stuff.” In the case of Sharepoint 2010, <span class="callout">this location is also known as the “14 Hive,” due to Microsoft changing the number associated with this directory for Sharepoint 2010.</span> If you’re familiar with other Microsoft products, including the Office suite, you’re probably used to seeing this strange integers associated with the filesystem structure.
+                    </p>
+
+                    <p>
+                        The thing about the Hive is that it’s monolithic. I’m on a fairly average Windows VM, housing a Sharepoint 2010 install running two or three separate Sharepoint sites, and my Hive directory currently contains over 11,000 files, and well over 1,000 subdirectories. Yikes.
+                    </p>
+
+                    <p>
+                        The Hive directory can be located at: <span class="callout">(TODO: PIC)</span>
+                    </p>
+
+                    <div class="centered">
+                        <strong>C: -> Program Files -> Common Files -> Microsoft Shared -> Web Server Extensions -> 14</strong>
+                    </div>
+
+                    <p>
+                        As you can imagine, clicking through that tree to locate the Hive can become tiring pretty quickly. <span class="callout">Set up a shortcut and toss it on your desktop or on the taskbar.</span> You’ll thank me later.
+                    </p>
+
+                    <p>
+                        For a nice rundown as far as what some of these directories and files within the Hive do, have a look at this resource:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://mysharepointwork.blogspot.com/2010/02/sharepoint-14-hive-directory-structure.html" target="_blank">http://mysharepointwork.blogspot.com/2010/02/sharepoint-14-hive-directory-structure.html</a>
+                    </div>
+
+                    <p>
+                        As you could likely assume, most of these things aren’t of concern to us, as front-end developers. However, there’s one directory that is: the “template” directory. We’ll discuss why shortly. Otherwise, just browse around a bit and have a vague idea of what types of files the Hive contains. Despite that you’ll likely only use a handful of things within the Hive during a project, understanding what it contains can be invaluable knowledge.
+                    </p>
+
+                    <div class="centered">
+                        <em>Visual Studio</em>
+                    </div>
+
+                    <p>
+                        Once again, if you’re familiar with .NET development, you probably know that most .NET developers prefer Visual Studio as their IDE of choice. There are many fantastic benefits to using VS:
+                    </p>
+
+                    <ul>
+                        <li>
+                            Badass code autocompletion
+                        </li>
+                        <li>
+                            <span class="callout">Built-in code version control via Team Foundation Server</span>
+                        </li>
+                        <li>
+                            Wide array of extensions and plugins
+                        </li>
+                        <li>
+                            Numerous color schemes and themes to style as you see fit
+                        </li>
+                    </ul>
+
+                    <p>
+                        By all accounts, VS is a pretty solid IDE, especially for .NET development. You’d be hard-pressed to find a more feature-complete piece of software for software development on the Microsoft stack.
+                    </p>
+
+                    <p>
+                        Unfortunately, VS can be extremely slow. It’s very heavyweight, eclipsing even Java-based IDEs such as Eclipse in size and resource consumption. Granted, this can be due largely in part to developing on a system with subpar available resources, so this may harken back to the “acquire more CPU/RAM/HD” requirement mentioned moments ago.
+                    </p>
+
+                    <p>
+                        Additionally, VS has fairly poor built-in support for front-end languages, especially Javascript. Without using extensions, a default VS install doesn’t even provide things like syntax highlighting or bracket matching for Javascript.
+                    </p>
+
+                    <div class="centered">
+                        <em>Team Foundation Server</em>
+                    </div>
+
+                    <p>
+                        Many Sharepoint projects will utilize TFS for version control. It’s a fairly common VCS for projects built on the Microsoft stack, due largely in part to it being directly integrated into Visual Studio. Like many centralized VCSes, it’s relatively straightforward to use, and if you’re coming from other centralized VCS options, such as Subversion, it will probably be quick to pick up. If you’re coming from a decentralized/distributed VCS, such as Git or Mercurial, even better.
+                    </p>
+
+                    <p>
+                        However, given the size and complexity of Sharepoint projects, there will be instances where you run into strange issues when checking in and/or merging code, many of them nonsensical and frustrating. Your problems may be compounded when you pull down code updates and suddenly your solution will no longer build or deploy. Fuck. Don’t worry! All in good time.
+                    </p>
+                </section>
+
+                <section>
+                    <h5>Front-end Issues: HTML</h5>
+
+                    <p>
+                        This is where things start to get nasty. The code that makes up Sharepoint varies drastically in quality; some adheres to modern web development standards, but most is a veritable mess of decade-old practices, improper semantics, and overly verbose horrors.
+                    </p>
+
+                    <div class="centered">
+                        <em>The Web Forms Model is Garbage</em>
+                    </div>
+
+                    <p>
+                        According to some of my .NET/Microsoft stack-developing comrades, <span class="callout">there are actually people out there who really enjoy the Web Forms model.</span> This, to me, is absolutely horrifying.
+                    </p>
+
+                    <p>
+                        So, here’s the concept: the .NET stack is, at its core, a framework intended for desktop software development. If you’re coming from a background in desktop software development, you’re used to having control over the ViewState of your application, as well as granular detail over any event that occurs within the application window: button clicks, for example. Originally, .NET did not possess a programming model for the web that paralleled the desktop software development model that already existed, and thus the Web Forms model was born.
+                    </p>
+
+                    <p>
+                        In essence, the Web Forms model attempts to turn a web application in the browser-based equivalent of a Windows desktop application. It attempts to force your web application into acting like a stateful application, which is rather contradictory to the way the web naturally functions.
+                    </p>
+
+                    <p>
+                        There’s some great elaboration into these concepts contained within this lengthy Stack Overflow thread:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://stackoverflow.com/questions/46031/why-does-the-asp-net-web-forms-model-suck" target="_blank">http://stackoverflow.com/questions/46031/why-does-the-asp-net-web-forms-model-suck</a>
+                    </div>
+
+                    <p>
+                        For you, the front-end developer, what “Web Forms” means is a few things:
+                    </p>
+
+                    <ol>
+                        <li>
+                            Each page of the entire application (in this case, a Sharepoint site) will be wrapped in a &#60;form> element
+                        </li>
+                        <li>
+                            There will be numerous hidden &#60;input> elements with terrifying name and ID attributes, intended to be used for tracking the ViewState of the application
+                        </li>
+                        <li>
+                            Many DOM elements will contain randomly generated IDs for this same purpose
+                        </li>
+                    </ol>
+
+                    <p>
+                        Take a brief pause here if you need to projectile vomit. I’ll understand.
+                    </p>
+
+                    <div class="centered">
+                        <em>ASP.NET Controls</em>
+                    </div>
+
+                    <p>
+                        As a front-end developer, you’ll largely be dealing with master pages and page layouts on an average Sharepoint project. This means that you’ll spend your time writing HTML, CSS, and JS, as well as fighting structures that already exist within Sharepoint’s included front-end files. Many of these structures will be ASP and Sharepoint controls.
+                    </p>
+
+                    <p>
+                        ASP controls are special tags that you’ll find scattered throughout an HTML page. These controls look similar to standard HTML tags, but begin with an <span class="callout">"asp:"</span> prefix, and will always possess a "runat='server'"" attribute. A fairly standard example would be:
+                    </p>
+
+                    <div class="centered">
+                        <strong>&#60;asp:control_name id="some_id" runat="server" /></strong>
+                    </div>
+
+                    <p>
+                        These controls are used to render any variety of objects onto a page, from form fields, to calendar date pickers, to content placeholders.
+                    </p>
+
+                    <p>
+                        ASP controls are a standard .NET construct, and as such, do not explicitly require a Sharepoint installation to function. However, there are a handful of ASP controls that are often used in conjunction with Sharepoint controls, which are ASP controls’ more problematic cousin.
+                    </p>
+
+                    <p>
+                        A comprehensive list of all ASP.NET controls can be located at:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://msdn.microsoft.com/en-us/library/ms227996.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/ms227996.aspx</a>
+                    </div>
+
+                    <div class="centered">
+                        <em>Sharepoint Controls</em>
+                    </div>
+
+                    <p>
+                        Much like ASP controls, Sharepoint controls appear as HTML tags and possess both an “id” and “runat” attribute. However, as one could logically assume, Sharepoint controls are used to generate structures used to interact with Sharepoint functionality in some way. As such, Sharepoint controls require a Sharepoint install to function properly, unlike ASP controls.
+                    </p>
+
+                    <p>
+                        A comprehensive list of all Sharepoint controls can be located at:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://msdn.microsoft.com/en-us/library/ee538247" target="_blank">http://msdn.microsoft.com/en-us/library/ee538247</a>
+                    </div>
+
+                    <p>
+                        Sharepoint controls get hairy for a variety of reasons:
+                    </p>
+
+                    <ul>
+                        <li>
+                            They often come coupled with ASP controls, and it may be unclear what each control does
+                        </li>
+                        <li>
+                            They often come <span class="callout">bundled</span> with/within other Sharepoint controls, making it difficult to tell what each control renders
+                        </li>
+                        <li>
+                            Certain controls may or may not be required for Sharepoint to function without <span class="callout">vomiting</span> errors at you
+                        </li>
+                        <li>
+                            It may be difficult to tell what the attributes on a Sharepoint control tag mean
+                        </li>
+                    </ul>
+
+                    <p>
+                        They can be one of Sharepoint’s most frustrating things for front-end developers to deal with, particularly if you’re involved with a heavy rebranding/restyling of Sharepoint’s default appearance. We’ll cover them shortly.
+                    </p>
+
+                    <div class="centered">
+                        <em>1998 is Forever (Web Standards? Never Heard of ‘Em)</em>
+                    </div>
+
+                    <p>
+                        <span class="callout">Microsoft has made it abundantly clear with Sharepoint 2010 that they give not a single fuck about web standards.</span> Though the HTML, CSS, and JS all reek of outdated practices in a number of areas, the HTML that comprises Sharepoint’s master pages and page layouts is arguably the worst offender.
+                    </p>
+
+                    <p>
+                        Allow me to give a brief, undoubtedly incomplete laundry list of some of the issues with Sharepoint’s HTML:
+                    </p>
+
+                    <ul>
+                        <li>
+                            Inline Javascript all over the place
+                        </li>
+                        <li>
+                            Unsemantic attribute values, IDs, and classes
+                        </li>
+                        <li>
+                            Inline CSS, located both on individual HTML tags as well as within the heads of pages
+                        </li>
+                        <li>
+                            Reliance on tables for layouts/presentation, especially for web parts and web part zones
+                        </li>
+                        <li>
+                            Nested tables as far as the eye can see
+                        </li>
+                        <li>
+                            Entire pages wrapped in form elements, thanks to the glory of the ASP.NET Web Forms model
+                        </li>
+                    </ul>
+
+                    <p>
+                        As I’m sure you’re beginning to realize, it’s not a pretty sight. Assuming you’ve been practicing modern web development standards for some time now (or, if you’re unfamiliar, just envision the EXACT OPPOSITE of everything on this list), simply close your eyes and roll your memory back to the late nineties. Now you’re getting the picture.
+                    </p>
+
+                    <p>
+                        Interface developer Emil Stenström has covered some of these missteps in greater detail on his blog, which I highly encourage you to check out:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://friendlybit.com/html/default-html-in-sharepoint-2007/" target="_blank">http://friendlybit.com/html/default-html-in-sharepoint-2007/</a>
+
+                        <br />
+
+                        <a href="http://friendlybit.com/html/sharepoint-2007-insanely-bad-html/" target="_blank">http://friendlybit.com/html/sharepoint-2007-insanely-bad-html/</a>
+                    </div>
+                </section>
+
+                <section>
+                    <h5>Front-end Issues: CSS</h5>
+
+                    <p>
+                        The fun doesn’t end there. As you undoubtedly know, being a high-and-mighty front-end developer, HTML is only a portion of what comprises the front-end of any given web project. Unfortunately, though the HTML contained within Sharepoint is bad, the CSS may quite possibly be even worse.
+                    </p>
+
+                    <div class="centered">
+                        <em>Randomly-Generated IDs</em>
+                    </div>
+
+                    <p>
+                        One of the unfortunate side effects of Sharepoint being based on the Web Forms programming model is that IDs on DOM elements are more than simple CSS selectors; they’re used by .NET to render page components and register structures on the page as these components. This means you may have a DIV on your page with an ID, such as:
+                    </p>
+
+                    <div class="centered">
+                        <strong class="callout">&#60;div id="MSO_ContentDiv" runat="server"></strong>
+                    </div>
+
+                    <p>
+                        Which will render dynamically during runtime, ultimately displaying:
+                    </p>
+
+                    <div class="centered">
+                        <strong>&#60;div id=”ctl00_MSO_ContentDiv”></strong>
+                    </div>
+
+                    <p>
+                        Again, if you’re familiar with the .NET Web Forms paradigm, you’re probably used to seeing this, so you’re thinking, “so what?” For the rest of you who find this type of nonsense appalling, trust me, you’re not alone.
+                    </p>
+
+                    <div class="centered">
+                        <em>Sharepoint’s Default CSS is More Lengthy than <strong>Atlas Shrugged</strong></em>
+                    </div>
+
+                    <p>
+                        The default CSS file that Sharepoint applies to a site off-the-shelf is a file called corev4.css, and is well over 7,000 lines of code in a default Sharepoint 2010 install. Need I say more?
+                    </p>
+
+                    <div class="centered">
+                        <em>Oh, Yeah, and You HAVE to Use it</em>
+                    </div>
+
+                    <p>
+                        You’re probably thinking to yourself, “ha! Why even use corev4.css? I’ll just dump it and write all the CSS from scratch!” I applaud your tenacity, but this is a terrible idea.
+                    </p>
+
+                    <p>
+                        Remember when I said Sharepoint was a behemoth? It contains so many UI elements, and the CSS is so convoluted and redundant that it would quite literally take weeks just to reproduce corev4.css in a consistent, reliable manner. As you’ll see when you have a working Sharepoint install up and running, there’s simply too much to reproduce. There are better ways to overcome its failures, which we’ll get at in due time.
+                    </p>
+
+                    <p>
+                        On top of that, if you’re deploying to Sharepoint Online, oftentimes Microsoft will disallow you from removing and/or altering default components that come with Sharepoint, and this includes its CSS.
+                    </p>
+
+                    <div class="centered">
+                        <em>It’s Ugly</em>
+                    </div>
+
+                    <p>
+                        The default IDs and classes used in corev4.css are terrible, unsemantic, and convoluted. Here are a few examples:
+                    </p>
+
+                    <ul>
+                        <li>
+                            th.ms-gridT1
+                        </li>
+                        <li>
+                            .ms-vb-itmcbx
+                        </li>
+                        <li>
+                            tr.ms-ppanerowalt
+                        </li>
+                        <li>
+                            .ms-rteThemeForeColor-4-5
+                        </li>
+                        <li>
+                            .ms-cui-glass-ff
+                        </li>
+                        <li>
+                            .ms-cui-cg-i
+                        </li>
+                    </ul>
+
+                    <p>
+                        Yup, those are all straight out of corev4.css. It gets worse, too: generally, the further down you scroll within the file, the more disgusted you’ll be.
+                    </p>
+
+                    <p>
+                        Presumably the “ms-” prefix on EVERY SINGLE RULE is intended as some sort of namespacing for Sharepoint, though I’m unsure why Microsoft seemed to find that necessary. Personally, I’d much prefer semantic names that dropped the prefix, even at the cost of them being a little more lengthy. Clarity over forced terseness every time, I say.
+                    </p>
+
+                    <div class="centered">
+                        <em>It’s Redundant</em>
+                    </div>
+
+                    <p>
+                        On top of just being straight-up unappealing to look at, corev4.css is incredibly redundant. When inspecting elements in the DOM, you’ll often find that numerous rules are being overwritten on a single element. This is particularly true for links; it’s not uncommon to discover a link on the page or within navigation to which six, eight, <span class="callout">or ten different CSS rules are applying, and all but one are consequently overwritten.</span>
+                    </p>
+
+                    <p>
+                        Furthermore, Microsoft inconsistently used unnecessary DOM element selectors in combination with CSS IDs and classes, resulting in selectors such as “span.ms-navitem” and “table.ms-toolbar.” Murder me.
+                    </p>
+
+                    <p>
+                        Oh, and let’s not forget the age-old classic, the “!important” keyword. In a quick Ctrl+F over corev4.css, I discovered almost 200 uses of it. Be prepared to use it yourself.
+                    </p>
+                </section>
+
+                <section>
+                    <h5>Front-end Issues: JS</h5>
+
+                    <p>
+                        Of the three aspects of Sharepoint’s front-end, the Javascript is, thankfully, the least painful to deal with. This is largely because, unlike the HTML and CSS, the JS cannot be removed, replaced, or overwritten. This can be both a boon and a curse: from the onset, just know that you’ll have to work around Sharepoint’s internal JS, and that it can’t (easily) be edited. You’ll be better off knowing about this restriction from the very beginning.
+                    </p>
+
+                    <div class="centered">
+                        <em>It’s Untouchable</em>
+                    </div>
+
+                    <p>
+                        Sharepoint’s built-in JS handles a wide variety of client-side tasks, from showing and hiding UI elements, to sending/receiving AJAX-y data, to everything in between. If you attempt to edit or remove any of this code, you’ll be in for a world of hurt. This is particularly true, again, if you intend to deploy to Sharepoint Online; Microsoft will assume that all of Sharepoint’s front-end assets are included with your solution, and if they’re not, this could cause issues with the approval process.
+                    </p>
+
+                    <div class="centered">
+                        <em>It Clashes with Other JS Libraries</em>
+                    </div>
+
+                    <p>
+                        If, like me, you’re used to using a variety of JS libraries and toolkits on an average webdev project, know right now that many of them may clash with Sharepoint’s internal JS. I’ve had issues attempting to use Modernizr, Selectivizr, and a variety of <span class="callout">jQuery</span> plugins that wouldn’t otherwise be problematic.
+                    </p>
+
+                    <p>
+                        What does this mean for you? Well, first and foremost, plan on not using your ol’ go-to libraries on a Sharepoint project. Secondly, plan on writing a lot of JS from scratch, especially to replace functionality for things that you’d normally incorporate via plugins. Keep in mind, also, that Sharepoint sites are typically intended for use via Internet Explorer, so any JS you write needs to work reliably in IE.
+                    </p>
+
+                    <p>
+                        Luckily, Sharepoint is compatible with most of the major JS frameworks, including our old friend jQuery. While some of your usual libraries will toss errors or clash with existing JS within the project, at least we can rely on having access to jQuery.
+                    </p>
+
+                    <p>
+                        For a directory of typical front-end extensions and JS libraries and frameworks that tend to be used in .NET projects, make sure to check out NuGet. While they may not all necessarily be compatible with your Sharepoint project, it’s a good place to start to be able to guess at whether or not the tool you’re looking to use is going to cause problems:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://nuget.org/" target="_blank">http://nuget.org/</a>
+                    </div>
                 </section>
             </article>
         </div>
