@@ -19,6 +19,7 @@
                 -webkit-margin-after: 0;
                 -webkit-margin-start: 0;
                 -webkit-margin-end: 0;
+                -webkit-padding-start: 0;
             }
 
             header,
@@ -30,22 +31,38 @@
             body {
                 font-size: 100%;
                 font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+                line-height: 1.4em;
             }
 
             p {
-                text-indent: 32px;
+                margin: 1.2em 0;
+                text-indent: 2em;
             }
 
             h1 {
                 font-size: 3em;
+                line-height: 1.4em;
             }
 
             h2 {
                 margin: 0 0 1em;
                 font-size: 1.8em;
+                line-height: 1.4em;
+            }
+
+            h3 {
+                font-size: 2em;
+                text-transform: uppercase;
+                line-height: 1.4em;
+            }
+
+            h4 {
+                margin: 0 0 1em;
+                font-size: 1.6em;
             }
 
             h5 {
+                margin: 0 0 1em;
                 font-size: 1.2em;
             }
 
@@ -67,6 +84,23 @@
                 text-decoration: underline;
             }
 
+            ul, ol {
+                margin: 0 1.4em;
+            }
+
+            ul li, ol li {
+                margin: 0.8em 0;
+            }
+
+            dl dt, dl dd {
+                margin: 1em 0;
+            }
+
+            dl dt {
+                text-indent: 2em;
+                font-style: italic;
+            }
+
             .container {
                 margin: 0 auto;
                 max-width: 600px;
@@ -75,6 +109,7 @@
             }
 
             .centered {
+                margin: 1em 0;
                 text-align: center;
             }
 
@@ -110,6 +145,7 @@
             }
 
             .subtle {
+                padding: 1px 10px;
                 background: lightgray;
             }
 
@@ -296,12 +332,6 @@
 
                     <li>
                         <h5><a href="#chapter05-title">Seventh Circle: Violence</a></h5>
-
-                        <ol>
-                            <li>
-                                <a href="#chapter05-part01">Conclusion & Summary</a>
-                            </li>
-                        </ol>
                     </li>
 
                     <li>
@@ -314,14 +344,14 @@
 
             <article>
                 <header class="centered">
-                    <h3>First Circle</h3>
+                    <h3 id="chapter01-title">First Circle</h3>
                     <h4>Limbo</h4>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
 
                 <section>
-                    <h5>Introduction</h5>
+                    <h5 id="chapter01-part01">Introduction</h5>
 
                     <p>
                         My condolences.
@@ -409,14 +439,14 @@
 
             <article>
                 <header class="centered">
-                    <h3>Third Circle</h3>
+                    <h3 id="chapter02-title">Third Circle</h3>
                     <h4>Gluttony</h4>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
 
                 <section>
-                    <h5>What is Sharepoint?</h5>
+                    <h5 id="chapter02-part01">What is Sharepoint?</h5>
 
                     <p>
                         This question stands alongside many of life’s most fundamental questions: what makes the sky blue? Where do babies come from? What is love? The answer to all of these questions is “Sharepoint.” Look, I’m not a scientist. I couldn’t possibly be, anyway; I’m here attempting to assist you, while those motherfuckers lyin’ and gettin’ you pissed.
@@ -458,7 +488,7 @@
                 </section>
 
                 <section>
-                    <h5>Technical Details</h5>
+                    <h5 id="chapter02-part02">Technical Details</h5>
 
                     <p>
                         As mentioned, Sharepoint is a web application platform developed by Microsoft. As one could reasonably presume, this means that Sharepoint runs on the Microsoft stack; that is, the tech stack comprised of the following components:
@@ -571,7 +601,7 @@
                 </section>
 
                 <section>
-                    <h5>Glossary</h5>
+                    <h5 id="chapter02-part03">Glossary</h5>
 
                     <p>
                         Deep in the bowels of hellfire and desperation that comprise Sharepoint, things are not always what they seem. Terminology that was once wholly familiar to you in an average web development environment may have a completely different meaning amongst the Microsoft stack. Even worse, there’s a smattering of new vocabulary that you’ve likely never heard before, especially if you’re coming from a background in another tech stack. Understanding the lingo of Sharepoint development is a huge part of being able to communicate with the back-end devs, so let’s take a look at a list of some of the terms you might come across.
@@ -581,7 +611,7 @@
                         It should be noted that this is only a partial list of Sharepoint terms; realistically, there are dozens, or even hundreds, of unfamiliar terms you might hear when working on a Sharepoint project. In my experience, these are some of the most common terms used on an everyday basis. For a more complete selection of Sharepoint terminology, I highly recommend scouring the following resources:
                     </p>
 
-                    <ul class="no-list">
+                    <ul class="centered no-list">
                         <li>
                             <a href="http://www.rharbridge.com/?page_id=60" target="_blank">http://www.rharbridge.com/?page_id=60</a>
                         </li>
@@ -781,7 +811,7 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Structure</h5>
+                    <h5 id="chapter02-part04">Front-end Structure</h5>
 
                     <p>
                         Structurally, Sharepoint is probably fairly similar to other CMSes you’ve used in the past: content is drawn from some sort of database and fed to the front-end, and may be displayed with widgets, page sections, or other page elements. In Sharepoint’s case, the content will be coming from a list or library, and will generally be presented via a web part.
@@ -847,7 +877,7 @@
                 </section>
 
                 <section>
-                    <h5>Back-end Structure</h5>
+                    <h5 id="chapter02-part05">Back-end Structure</h5>
 
                     <p>
                         “Yeah, yeah, whatever!” you shout obnoxiously, rudely interrupting my poignant critique of Sharepoint’s front-end. “But what about the back-end?!” Well, you’re sort of out of luck there. Admittedly, I don’t know much about how Sharepoint’s back-end actually functions.
@@ -876,7 +906,7 @@
 
             <article>
                 <header class="centered">
-                    <h3>Fifth Circle</h3>
+                    <h3 id="chapter03-title">Fifth Circle</h3>
                     <h4>Anger</h4>
 
                     <h6><a href="#">back to top</a></h6>
@@ -897,7 +927,7 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Issues: Filesystem/Summation</h5>
+                    <h5 id="chapter03-part01">Front-end Issues: Filesystem/Summation</h5>
 
                     <div class="centered">
                         <em>Windows Virtual Machines</em>
@@ -1012,7 +1042,7 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Issues: HTML</h5>
+                    <h5 id="chapter03-part02">Front-end Issues: HTML</h5>
 
                     <p>
                         This is where things start to get nasty. The code that makes up Sharepoint varies drastically in quality; some adheres to modern web development standards, but most is a veritable mess of decade-old practices, improper semantics, and overly verbose horrors.
@@ -1174,17 +1204,18 @@
                         Interface developer Emil Stenström has covered some of these missteps in greater detail on his blog, which I highly encourage you to check out:
                     </p>
 
-                    <div class="centered">
-                        <a href="http://friendlybit.com/html/default-html-in-sharepoint-2007/" target="_blank">http://friendlybit.com/html/default-html-in-sharepoint-2007/</a>
-
-                        <br />
-
-                        <a href="http://friendlybit.com/html/sharepoint-2007-insanely-bad-html/" target="_blank">http://friendlybit.com/html/sharepoint-2007-insanely-bad-html/</a>
-                    </div>
+                    <ul class="centered no-list">
+                        <li>
+                            <a href="http://friendlybit.com/html/default-html-in-sharepoint-2007/" target="_blank">http://friendlybit.com/html/default-html-in-sharepoint-2007/</a>
+                        </li>
+                        <li>
+                            <a href="http://friendlybit.com/html/sharepoint-2007-insanely-bad-html/" target="_blank">http://friendlybit.com/html/sharepoint-2007-insanely-bad-html/</a>
+                        </li>
+                    </ul>
                 </section>
 
                 <section>
-                    <h5>Front-end Issues: CSS</h5>
+                    <h5 id="chapter03-part03">Front-end Issues: CSS</h5>
 
                     <p>
                         The fun doesn’t end there. As you undoubtedly know, being a high-and-mighty front-end developer, HTML is only a portion of what comprises the front-end of any given web project. Unfortunately, though the HTML contained within Sharepoint is bad, the CSS may quite possibly be even worse.
@@ -1293,7 +1324,7 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Issues: JS</h5>
+                    <h5 id="chapter03-part04">Front-end Issues: JS</h5>
 
                     <p>
                         Of the three aspects of Sharepoint’s front-end, the Javascript is, thankfully, the least painful to deal with. This is largely because, unlike the HTML and CSS, the JS cannot be removed, replaced, or overwritten. This can be both a boon and a curse: from the onset, just know that you’ll have to work around Sharepoint’s internal JS, and that it can’t (easily) be edited. You’ll be better off knowing about this restriction from the very beginning.
@@ -1335,7 +1366,7 @@
 
             <article>
                 <header class="centered">
-                    <h3>Sixth Circle</h3>
+                    <h3 id="chapter04-title">Sixth Circle</h3>
                     <h4>Heresy</h4>
 
                     <h6><a href="#">back to top</a></h6>
@@ -1356,7 +1387,7 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Tips & Tricks: Filesystem/Summation</h5>
+                    <h5 id="chapter04-part01">Front-end Tips & Tricks: Filesystem/Summation</h5>
 
                     <div class="centered">
                         <em>Windows Virtual Machines</em>
@@ -1476,7 +1507,7 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Tips & Tricks: HTML</h5>
+                    <h5 id="chapter04-part02">Front-end Tips & Tricks: HTML</h5>
 
                     <div class="centered">
                         <em>The Web Forms Model is Garbage</em>
@@ -1574,7 +1605,7 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Tips & Tricks: CSS</h5>
+                    <h5 id="chapter04-part03">Front-end Tips & Tricks: CSS</h5>
 
                     <div class="centered">
                         <em>Randomly-Generated IDs</em>
@@ -1662,7 +1693,7 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Tips & Tricks: JS</h5>
+                    <h5 id="chapter04-part04">Front-end Tips & Tricks: JS</h5>
 
                     <div class="centered">
                         <em>It’s Untouchable</em>
@@ -1716,7 +1747,7 @@
 
             <article>
                 <header class="centered">
-                    <h3>Seventh Circle</h3>
+                    <h3 id="chapter05-title">Seventh Circle</h3>
                     <h4>Violence</h4>
 
                     <h6><a href="#">back to top</a></h6>
@@ -1763,7 +1794,7 @@
 
             <article>
                 <header class="centered">
-                    <h3>About the Author</h3>
+                    <h3 id="chapter06-title">About the Author</h3>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
@@ -1785,11 +1816,17 @@
                         Feel free to check out my website and Github account, as well as spark up a conversation via Twitter or email. I’m frequently looking for new projects and contracts, both local and remote, so you’re encouraged to drop me a line.
                     </p>
 
-                    <div class="centered">
-                        <a href="http://jkymarsh.com/" target="_blank">http://jkymarsh.com/</a> |
-                        <a href="https://github.com/jkymarsh" target="_blank">https://github.com/jkymarsh</a> |
-                        <a href="https://twitter.com/jkymarsh" target="_blank">https://twitter.com/jkymarsh</a>
-                    </div>
+                    <ul class="centered no-list">
+                        <li>
+                            <a href="http://jkymarsh.com/" target="_blank">http://jkymarsh.com/</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jkymarsh" target="_blank">https://github.com/jkymarsh</a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/jkymarsh" target="_blank">https://twitter.com/jkymarsh</a>
+                        </li>
+                    </ul>
                 </section>
             </article>
         </div>
