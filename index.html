@@ -105,6 +105,30 @@
                 font-style: italic;
             }
 
+            code, pre {
+                display: block;
+                padding: 0.6em;
+
+                font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+
+                -webkit-border-radius: 4px;
+                border-radius: 4px;
+
+                -moz-background-clip: padding;
+                -webkit-background-clip: padding-box;
+                background-clip: padding-box;
+            }
+
+            code {
+                color: #fff;
+                
+                background: #222;
+            }
+
+            pre {
+                border: 1px solid #222;
+            }
+
             .container {
                 margin: 0 auto;
                 max-width: 600px;
@@ -585,7 +609,7 @@
                     </p>
 
                     <div class="centered">
-                        <span>List/Library > Web Part > Page > Site/Sub-site</span>
+                        <pre>List/Library > Web Part > Page > Site/Sub-site</pre>
                     </div>
 
                     <p>
@@ -862,14 +886,15 @@
                     <ul>
                         <li>
                             They’ll be riddled with server code, such as:<br />
-                            &#60;%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+                            <code>&#60;%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %></code>
                         </li>
                         <li>
                             They’ll be riddled with Sharepoint controls, such as:<br />
-                            &#60;SharePoint:CssRegistration Name="/Style Library/SomeSite/css/960.css" runat="server" After="corev4.css"/></li>
+                            <code>&#60;SharePoint:CssRegistration Name="/Style Library/SomeSite/css/960.css" runat="server" After="corev4.css"/></code>
+                        </li>
                         <li>
                             They’ll be riddled with ASP.NET controls, such as:<br />
-                            &#60;asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat="server" />
+                            <code>&#60;asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat="server" /></code>
                         </li>
                         <li>
                             They may contain inline CSS
@@ -982,7 +1007,7 @@
                     </div>
 
                     <p>
-                        As mentioned way back in the glossary, the “Hive” is the location on a Windows filesystem where Sharepoint “keeps all its stuff.” In the case of Sharepoint 2010, <span class="callout">this location is also known as the “14 Hive,” due to Microsoft changing the number associated with this directory for Sharepoint 2010.</span> If you’re familiar with other Microsoft products, including the Office suite, you’re probably used to seeing this strange integers associated with the filesystem structure.
+                        As mentioned way back in the glossary, the “Hive” is the location on a Windows filesystem where Sharepoint “keeps all its stuff.” In the case of Sharepoint 2010, <span class="callout">this location is also known as the “14 Hive,” due to Microsoft changing the number associated with this directory for Sharepoint 2010.</span> If you’re familiar with other Microsoft products, including the Office suite, you’re probably used to seeing these strange integers associated with the filesystem structure.
                     </p>
 
                     <p>
@@ -994,7 +1019,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>C: -> Program Files -> Common Files -> Microsoft Shared -> Web Server Extensions -> 14</strong>
+                        <pre>C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14</pre>
                     </div>
 
                     <p>
@@ -1125,7 +1150,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>&#60;asp:control_name id="some_id" runat="server" /></strong>
+                        <code>&#60;asp:control_name id="some_id" runat="server" /></code>
                     </div>
 
                     <p>
@@ -1250,7 +1275,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong class="callout">&#60;div id="MSO_ContentDiv" runat="server"></strong>
+                        <code>&#60;div id="MSO_ContentDiv" runat="server"></code>
                     </div>
 
                     <p>
@@ -1258,7 +1283,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>&#60;div id=”ctl00_MSO_ContentDiv”></strong>
+                        <code>&#60;div id=”ctl00_MSO_ContentDiv”></code>
                     </div>
 
                     <p>
@@ -1432,7 +1457,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>C: -> Program Files -> Common Files -> Microsoft Shared -> Web Server Extensions -> 14</strong>
+                        <pre>C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14</pre>
                     </div>
 
                     <p>
@@ -1460,7 +1485,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>&#60;SharePoint:CssRegistration Name="/Style Library/[project name]/css/style.css" runat="server" After="corev4.css" /></strong>
+                        <code>&#60;SharePoint:CssRegistration Name="/Style Library/[project name]/css/style.css" runat="server" After="corev4.css" /></code>
                     </div>
 
                     <p>
@@ -1468,7 +1493,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>&#60;SharePoint:CssRegistration Name="/_layouts/[project name]/css/style.css" runat="server" After="corev4.css" /></strong>
+                        <code>&#60;SharePoint:CssRegistration Name="/_layouts/[project name]/css/style.css" runat="server" After="corev4.css" /></code>
                     </div>
 
                     <p>
@@ -1548,7 +1573,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>&#60;asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server" /></strong>
+                        <code>&#60;asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server" /></code>
                     </div>
 
                     <p>
@@ -1556,9 +1581,9 @@
                     </p>
 
                     <div class="centered">
-                        <strong>&#60;asp:Panel visible="false" runat="server">
+                        <code>&#60;asp:Panel visible="false" runat="server">
 &#60;asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server" />
-&#60;/asp:Panel></strong>
+&#60;/asp:Panel></code>
                     </div>
 
                     <p>
@@ -1678,7 +1703,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>body #s4-ribbonrow * { margin: 0; padding: 0; }</strong>
+                        <code>body #s4-ribbonrow * { margin: 0; padding: 0; }</code>
                     </div>
 
                     <p>
@@ -1698,7 +1723,7 @@
                     </p>
 
                     <div class="centered">
-                        <strong>&#60;SharePoint:CssRegistration Name="/Style Library/[project name]/css/style.css" runat="server" After="corev4.css"/></strong>
+                        <code>&#60;SharePoint:CssRegistration Name="/Style Library/[project name]/css/style.css" runat="server" After="corev4.css"/></code>
                     </div>
 
                     <p>
