@@ -14,6 +14,10 @@
         <meta name="viewport" content="width=device-width">
 
         <style type="text/css">
+            /*! normalize.css v1.1.0 | MIT License | git.io/normalize */article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,video{display:inline-block;*display:inline;*zoom:1}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html,button,input,select,textarea{font-family:sans-serif}body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em;margin:.83em 0}h3{font-size:1.17em;margin:1em 0}h4{font-size:1em;margin:1.33em 0}h5{font-size:.83em;margin:1.67em 0}h6{font-size:.67em;margin:2.33em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}blockquote{margin:1em 40px}dfn{font-style:italic}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}mark{background:#ff0;color:#000}p,pre{margin:1em 0}code,kbd,pre,samp{font-family:monospace,serif;_font-family:'courier new',monospace;font-size:1em}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word}q{quotes:none}q:before,q:after{content:'';content:none}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}dl,menu,ol,ul{margin:1em 0}dd{margin:0 0 0 40px}menu,ol,ul{padding:0 0 0 40px}nav ul,nav ol{list-style:none;list-style-image:none}img{border:0;-ms-interpolation-mode:bicubic}svg:not(:root){overflow:hidden}figure{margin:0}form{margin:0}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0;white-space:normal;*margin-left:-7px}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle}button,input{line-height:normal}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;*overflow:visible}button[disabled],html input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;*height:13px;*width:13px}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}
+        </style>
+
+        <style type="text/css">
             * {
                 -webkit-margin-before: 0;
                 -webkit-margin-after: 0;
@@ -25,11 +29,12 @@
             header,
             article,
             section {
-                margin: 40px 0;
+                margin: 3em 0;
             }
 
             body {
                 font-size: 100%;
+                color: #222;
                 font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
                 line-height: 1.4em;
             }
@@ -39,37 +44,32 @@
                 text-indent: 2em;
             }
 
-            h1 {
+            h1, h2, h3, h4, h5, h6 {
                 margin: 0;
-                font-size: 3em;
                 line-height: 1.4em;
+            }
+
+            h1 {
+                font-size: 3em;
             }
 
             h2 {
-                margin: 0 0 1em;
                 font-size: 1.8em;
-                line-height: 1.4em;
             }
 
             h3 {
-                margin: 0;
                 font-size: 2em;
-                text-transform: uppercase;
-                line-height: 1.4em;
             }
 
             h4 {
-                margin: 0 0 1em;
                 font-size: 1.6em;
             }
 
             h5 {
-                margin: 0 0 1em;
                 font-size: 1.2em;
             }
 
             h6 {
-                margin: 0;
                 font-size: 0.9em;
             }
 
@@ -108,12 +108,21 @@
             .container {
                 margin: 0 auto;
                 max-width: 600px;
+            }
 
-                border: 0px solid #000;
+            .margin-top {
+                margin: 1.4em 0 0;
+            }
+
+            .margin-bottom {
+                margin: 0 0 1.4em;
+            }
+
+            .uppercase {
+                text-transform: uppercase;
             }
 
             .centered {
-                margin: 1em 0;
                 text-align: center;
             }
 
@@ -122,8 +131,8 @@
             }
 
             .warning {
-                margin: 10px;
-                padding: 12px;
+                margin: 1.2em;
+                padding: 1.2em;
 
                 color: #fff;
 
@@ -146,11 +155,12 @@
 
             .warning a:hover {
                 color: #222;
+                text-shadow: none;
             }
 
             .subtle {
-                padding: 1px 10px;
-                background: lightgray;
+                padding: 0.2em 1em;
+                background: #dedede;
                 word-break: break-all;
                 word-wrap: break-word;
             }
@@ -172,7 +182,7 @@
 
             <header class="centered">
                 <h1>The Nine Circles of Hell:</h1>
-                <h2>Front-End Development for Sharepoint</h2>
+                <h2 class="margin-bottom">Front-End Development for Sharepoint</h2>
                 <h6><em>a quick-start guide</em></h6>
 
                 <h6>by J. Ky Marsh</h6>
@@ -263,7 +273,7 @@
             <hr />
 
             <article>
-                <h5>Table of Contents</h5>
+                <h5 class="margin-bottom">Table of Contents</h5>
 
                 <ol>
                     <li>
@@ -350,8 +360,8 @@
 
             <article>
                 <header class="centered">
-                    <h3 id="chapter01-title">First Circle</h3>
-                    <h4>Limbo</h4>
+                    <h3 id="chapter01-title" class="uppercase">First Circle</h3>
+                    <h4 class="margin-bottom">Limbo</h4>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
@@ -445,8 +455,8 @@
 
             <article>
                 <header class="centered">
-                    <h3 id="chapter02-title">Third Circle</h3>
-                    <h4>Gluttony</h4>
+                    <h3 id="chapter02-title" class="uppercase">Third Circle</h3>
+                    <h4 class="margin-bottom">Gluttony</h4>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
@@ -916,8 +926,8 @@
 
             <article>
                 <header class="centered">
-                    <h3 id="chapter03-title">Fifth Circle</h3>
-                    <h4>Anger</h4>
+                    <h3 id="chapter03-title" class="uppercase">Fifth Circle</h3>
+                    <h4 class="margin-bottom">Anger</h4>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
@@ -937,7 +947,7 @@
                 </section>
 
                 <section>
-                    <h5 id="chapter03-part01">Front-end Issues: Filesystem/Summation</h5>
+                    <h5 id="chapter03-part01" class="margin-bottom">Front-end Issues: Filesystem/Summation</h5>
 
                     <div class="centered">
                         <em>Windows Virtual Machines</em>
@@ -1111,7 +1121,7 @@
                     </p>
 
                     <p>
-                        ASP controls are special tags that you’ll find scattered throughout an HTML page. These controls look similar to standard HTML tags, but begin with an <span class="callout">"asp:"</span> prefix, and will always possess a "runat='server'"" attribute. A fairly standard example would be:
+                        ASP controls are special tags that you’ll find scattered throughout an HTML page. These controls look similar to standard HTML tags, but begin with an <span class="callout">"asp:"</span> prefix, and will always possess a "runat='server'" attribute. A fairly standard example would be:
                     </p>
 
                     <div class="centered">
@@ -1130,7 +1140,7 @@
                         A comprehensive list of all ASP.NET controls can be located at:
                     </p>
 
-                    <div class="centered">
+                    <div class="centered margin-bottom">
                         <a href="http://msdn.microsoft.com/en-us/library/ms227996.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/ms227996.aspx</a>
                     </div>
 
@@ -1378,8 +1388,8 @@
 
             <article>
                 <header class="centered">
-                    <h3 id="chapter04-title">Sixth Circle</h3>
-                    <h4>Heresy</h4>
+                    <h3 id="chapter04-title" class="uppercase">Sixth Circle</h3>
+                    <h4 class="margin-bottom">Heresy</h4>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
@@ -1399,7 +1409,7 @@
                 </section>
 
                 <section>
-                    <h5 id="chapter04-part01">Front-end Tips & Tricks: Filesystem/Summation</h5>
+                    <h5 id="chapter04-part01" class="margin-bottom">Front-end Tips & Tricks: Filesystem/Summation</h5>
 
                     <div class="centered">
                         <em>Windows Virtual Machines</em>
@@ -1519,7 +1529,7 @@
                 </section>
 
                 <section>
-                    <h5 id="chapter04-part02">Front-end Tips & Tricks: HTML</h5>
+                    <h5 id="chapter04-part02" class="margin-bottom">Front-end Tips & Tricks: HTML</h5>
 
                     <div class="centered">
                         <em>The Web Forms Model is Garbage</em>
@@ -1555,7 +1565,7 @@
                         A list of all ContentPlaceHolder controls can be found here:
                     </p>
 
-                    <div class="centered">
+                    <div class="centered margin-bottom">
                         <a href="http://office.microsoft.com/en-us/sharepoint-designer-help/modify-the-default-sharepoint-content-placeholders-HA010165120.aspx" target="_blank">http://office.microsoft.com/en-us/sharepoint-designer-help/modify-the-default-sharepoint-content-placeholders-HA010165120.aspx</a>
                     </div>
 
@@ -1617,7 +1627,7 @@
                 </section>
 
                 <section>
-                    <h5 id="chapter04-part03">Front-end Tips & Tricks: CSS</h5>
+                    <h5 id="chapter04-part03" class="margin-bottom">Front-end Tips & Tricks: CSS</h5>
 
                     <div class="centered">
                         <em>Randomly-Generated IDs</em>
@@ -1705,7 +1715,7 @@
                 </section>
 
                 <section>
-                    <h5 id="chapter04-part04">Front-end Tips & Tricks: JS</h5>
+                    <h5 id="chapter04-part04" class="margin-bottom">Front-end Tips & Tricks: JS</h5>
 
                     <div class="centered">
                         <em>It’s Untouchable</em>
@@ -1761,8 +1771,8 @@
 
             <article>
                 <header class="centered">
-                    <h3 id="chapter05-title">Seventh Circle</h3>
-                    <h4>Violence</h4>
+                    <h3 id="chapter05-title" class="uppercase">Seventh Circle</h3>
+                    <h4 class="margin-bottom">Violence</h4>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
@@ -1810,7 +1820,7 @@
 
             <article>
                 <header class="centered">
-                    <h3 id="chapter06-title">About the Author</h3>
+                    <h3 id="chapter06-title" class="uppercase margin-bottom">About the Author</h3>
 
                     <h6><a href="#">back to top</a></h6>
                 </header>
@@ -1847,6 +1857,5 @@
             </article>
         </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     </body>
 </html>
