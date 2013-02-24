@@ -1,4 +1,3 @@
-theninecirclesofhell
-====================
+# The Nine Circles of Hell: Front-End Development for Sharepoint
 
-The Nine Circles of Hell: Front-End Development for Sharepoint - a quick-start guide
+Please see the [master branch](https://github.com/jkymarsh/theninecirclesofhell) for more information.
