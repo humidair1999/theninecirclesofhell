@@ -1299,7 +1299,7 @@
 
                 <section>
                     <p>
-                        I can picture you now: you’re sweating profusely, furiously gripping your keyboard, knuckles white from your iron grip. “Why is Microsoft doing this to me?!” you demand to know, spittle forming at the corners of your mouth, temples pounding from the impending migraine. I wish I knew, my friend. I wish I knew.
+                        I can picture you now: you’re sweating profusely, furiously gripping your keyboard, knuckles white from your iron grip. <em>“Why is Microsoft doing this to me?!”</em> you demand to know, spittle forming at the corners of your mouth, temples pounding from the impending migraine. I wish I knew, my friend. <em>I wish I knew.</em>
                     </p>
 
                     <p>
@@ -1312,15 +1312,440 @@
                 </section>
 
                 <section>
-                    <h5>Front-end Issues: Filesystem/Summation</h5>
+                    <h5>Front-end Tips & Tricks: Filesystem/Summation</h5>
 
                     <div class="centered">
                         <em>Windows Virtual Machines</em>
                     </div>
 
                     <p>
-                        This one may or may not apply to you, depending on your team and particular project. <span class="callout">Oftentimes, Sharepoint (and .NET in general) developers will all develop using a virtual machine image, rather than local installs of Sharepoint on each developer’s machine. There are a few reasons this is done:</span>
+                        I already defied my own rule on this one, and I feel terrible about it - I gave you one of my wonderful, priceless secrets up front. I don’t know how I sleep at night.
                     </p>
+
+                    <p>
+                        The key here, as mentioned in the previous chapter, is simply to crank up your VM’s resources. More CPU cores, more RAM, more video memory, more more, more more more. More is gooder. Never forget it.
+                    </p>
+
+                    <div class="centered">
+                        <em>The Hive</em>
+                    </div>
+
+                    <p>
+                        This one’s important. Hopefully you took my advice in the previous chapter and set up a taskbar shortcut to the Hive; if not, definitely do that now. Seriously. I’ll fucking wait. In case you’ve forgotten <em><a href="http://www.youtube.com/watch?v=ioVk9MeZNGg" target="_blank">(you fool!)</a></em>, the Hive is located at:
+                    </p>
+
+                    <div class="centered">
+                        <strong>C: -> Program Files -> Common Files -> Microsoft Shared -> Web Server Extensions -> 14</strong>
+                    </div>
+
+                    <p>
+                        Within this directory, you’ll find a bunch of subdirectories, but the most important one for you as a front-end developer is the “template” directory. Within this directory, you’ll find even more subdirectories, housing a whole bunch of important Sharepoint stuff, from global master page templates, to ASP and Sharepoint control templates, to static Sharepoint assets (such as images). Browse around a bit. Go wild.
+                    </p>
+
+                    <p>
+                        The most important subdirectory within “template” is “layouts,” however. “Layouts” is typically where all Sharepoint sites’ front-ends are stored within the Hive for most projects. If you open “layouts” up, you’ll likely see a subdirectory named after the Sharepoint site you’re working on. If not, ask one of the back-end devs, and they’ll likely know. Additionally, there should be directories for default Sharepoint installs, likely named “1033” and ”1036.” These will contain a whole lot of fun static assets, including all of Sharepoint’s included CSS and JS.
+                    </p>
+
+                    <p>
+                        Your particular project’s directory is the key here, though. You see, Sharepoint has two ways of referencing static assets: either via this “layouts” directory, or via the Style Library, which you should remember from way back in earlier chapters. On a deployed Sharepoint site, these assets will reside within the Style Library. However, the Style Library will piss you off instantaneously during development, as it effectively acts as a database for your assets. This is annoying as shit, because it means <span class="callout">you have to redeploy your assets every single time you change them.</span>
+                    </p>
+
+                    <p>
+                        Yes, you read that correctly. Edit a master page’s HTML? Redeploy the solution. Change some of the project’s CSS? Redeploy. Make some changes to your JS? Redeploy.
+                    </p>
+
+                    <p>
+                        Having to redeploy every time will quite possibly drive you to suicide.
+                    </p>
+
+                    <p>
+                        The sheer number of man-hours you’ll waste waiting for your solution to build and redeploy will be staggering. Luckily, there’s an awesome, quick fix for this: in your project’s master pages, you’ll probably see references to assets as such:
+                    </p>
+
+                    <div class="centered">
+                        <strong>&#60;SharePoint:CssRegistration Name="/Style Library/[project name]/css/style.css" runat="server" After="corev4.css" /></strong>
+                    </div>
+
+                    <p>
+                        During development, change these links as such:
+                    </p>
+
+                    <div class="centered">
+                        <strong>&#60;SharePoint:CssRegistration Name="/_layouts/[project name]/css/style.css" runat="server" After="corev4.css" /></strong>
+                    </div>
+
+                    <p>
+                        By doing this, you’re effectively changing the working location for your assets from the Style Library to the “layouts” folder within the Hive. You can now place your images, CSS, and JS within your project’s directory in the “layouts” directory, and you’ll no longer have to redeploy your solution every time you make changes. Huzzah!
+                    </p>
+
+                    <p>
+                        Of course, <span class="callout">this is only for development</span>. For deployment and/or testing, you’ll still have to make sure your files are updated and deployed from within the Style Library. It’s effectively the Sharepoint equivalent of developing locally versus developing remotely; locally is, of course, much faster, but you have to make sure your changes are propagated remotely when you’re done.
+                    </p>
+
+                    <p>
+                        Now, that’s only good for images, CSS, and JS. When you’re working on master pages or page layouts, there’s no easily-accessible Hive equivalent, as your HTML pages will all likely be located solely within your solution in Visual Studio. This means you’d have to continue the horrific trend of redeploying every time you make changes to any HTML pages.
+                    </p>
+
+                    <p>
+                        But wait! There’s a solution for that, too!
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://cksdev.codeplex.com/" target="_blank">http://cksdev.codeplex.com/</a>
+                    </div>
+
+                    <p>
+                        CKS, or Community Kit for Sharepoint, is a set of Visual Studio extensions for Sharepoint that make development considerably less painful. You may have to read a little about it to determine which of its features will most benefit you, but personally, it has one feature that I find to be a total lifesaver: “Copy to Sharepoint Root.” This right-click menu option will appear on all files within your solution after installing CKS, including your master pages and page layouts. Now, instead of redeploying after every edit to your HTML pages, simply use “Copy to Sharepoint Root,” and you’ll be able to see your changes instantly upon page refresh. <span class="callout">No more “deploy” command needed</span>!
+                    </p>
+
+                    <p>
+                        Again, CKS has a variety of other useful features as well, so make sure to do some reading up on it. It’s a real lifesaver.
+                    </p>
+
+                    <div class="centered">
+                        <em>Visual Studio</em>
+                    </div>
+
+                    <p>
+                        All things considered, VS is actually an extremely capable IDE, both for .NET (C#/VB) development, as well as for front-end development. You may find that it’s missing features common to other IDEs and editors, however, such as syntax highlighting, autocompletion, zen coding, or any other number of extensions you might like to use.
+                    </p>
+
+                    <p>
+                        It’s worth having a look through the extensions gallery for VS, just to see if there are any extensions that might be of use to you:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://visualstudiogallery.msdn.microsoft.com/" target="_blank">http://visualstudiogallery.msdn.microsoft.com/</a>
+                    </div>
+
+                    <p>
+                        Additionally, if you’re using the Hive and/or CKS tweak(s) mentioned above, you can actually continue using your editor of choice, opening the project directory within the Hive in the editor, and doing all your coding outside of VS. However, keep in mind that you’ll have to manually move your code into VS eventually, both for deploying it into the Style Library, as well as for making sure it’s properly tracked in version control via Team Foundation Server.
+                    </p>
+
+                    <div class="centered">
+                        <em>Team Foundation Server</em>
+                    </div>
+
+                    <p>
+                        Being centralized version control, there’s not a whole lot of ambiguity to TFS. It’s fairly straightforward - you’ll do a lot of “Get Latest” and “Check In,” occasionally using “Get Specific Version” or “View History” for more fine-grained control. Make sure to check with your back-end team to make sure you’re aware of any project-specific guidelines for commit messages or code check-in standards.
+                    </p>
+                </section>
+
+                <section>
+                    <h5>Front-end Tips & Tricks: HTML</h5>
+
+                    <div class="centered">
+                        <em>The Web Forms Model is Garbage</em>
+                    </div>
+
+                    <p>
+                        Understanding the Web Forms model is half the battle here. Unfortunately, since Sharepoint wasn’t built using MVC architecture, you really have no alternative here, so you best get used to it. Above all else, it’s imperative that you understand that the Web Forms model dictates that you’ll have a number of extra HTML elements in the DOM, and this cannot be helped. Do your best to ignore them. They can smell your fear.
+                    </p>
+
+                    <div class="centered">
+                        <em>ASP.NET Controls</em>
+                    </div>
+
+                    <p>
+                        The vast majority of .NET controls you’ll come across will be Sharepoint controls, which we’ll cover shortly, but ASP controls will crop up fairly frequently as well. One of the more common controls is the ContentPlaceHolder control, which will look as such:
+                    </p>
+
+                    <div class="centered">
+                        <strong>&#60;asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server" /></strong>
+                    </div>
+
+                    <p>
+                        As you could probably have assumed, these controls are used as placeholders where actual content will be dumped upon the page being rendered. While you may use most of these placeholders on an average master page, they’re often not required for the page to render without errors. However, if you do intend to deploy your Sharepoint site to Sharepoint Online, be aware that the code review process expects that ALL possible ContentPlaceHolder controls will reside within each master page, even if some are unused. As such, it’s typical to wrap all of the unused controls in a hidden ASP Panel control at the bottom of each master page:
+                    </p>
+
+                    <div class="centered">
+                        <strong>&#60;asp:Panel visible="false" runat="server">
+&#60;asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server" />
+&#60;/asp:Panel></strong>
+                    </div>
+
+                    <p>
+                        A list of all ContentPlaceHolder controls can be found here:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://office.microsoft.com/en-us/sharepoint-designer-help/modify-the-default-sharepoint-content-placeholders-HA010165120.aspx" target="_blank">http://office.microsoft.com/en-us/sharepoint-designer-help/modify-the-default-sharepoint-content-placeholders-HA010165120.aspx</a>
+                    </div>
+
+                    <div class="centered">
+                        <em>Sharepoint Controls</em>
+                    </div>
+
+                    <p>
+                        Sharepoint controls are a bit more frustrating, unfortunately.
+                    </p>
+
+                    <p>
+                        They’ll be used to render any variety of Sharepoint-specific page elements, from the Ribbon element, to the web parts panel, to the site’s logo container, to the navigation... Yeah, they’re everywhere. After working with the controls themselves, you’ll begin to recognize which control renders which object, and consequently, you’ll be able to look at the design/branding of a Sharepoint site and determine which controls you can modify or eliminate to match the design whilst simultaneously eliminating unnecessary code.
+                    </p>
+
+                    <p>
+                        As far as being able to tell which controls (or parts of controls) can be safely removed, sadly, that’s often a matter of trial-and-error. For example, the SPRibbonPeripheralContent control will often contain other controls, such as the SiteActions and FeatureMenuTemplate controls. Some can be removed without incident, while removing others will prevent your page from rendering, as well as throw a vague, frustrating error: <span class="callout">(TODO: error screenshot)</span>
+                    </p>
+
+                    <p>
+                        The best tactic is simply to use your design as a reference, removing unnecessary controls and ensuring you’re not getting any errors on pageload.
+                    </p>
+
+                    <p>
+                        Oh, and while we’re speaking of Sharepoint errors: you’ll often find that edits you’ve made to your front-end code (or even that back-end code changes you’ve pulled in via TFS) cause your Sharepoint site to throw errors for seemingly inexplicable reasons. I highly recommend downloading Sharepoint LogViewer:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://sharepointlogviewer.codeplex.com/" target="_blank">http://sharepointlogviewer.codeplex.com/</a>
+                    </div>
+
+                    <p>
+                        It’ll help you clarify exactly where the issue is, so you can then scuttle over to a back-end dev and pathetically beg them to help you “fix it.”
+                    </p>
+
+                    <div class="centered">
+                        <em>1998 is Forever (Web Standards? Never Heard of ‘Em)</em>
+                    </div>
+
+                    <p>
+                        Some issues with Sharepoint’s HTML can be resolved or mitigated, and some, well, can’t. Web Forms code and HTML elements, ASP controls, and Sharepoint controls, of course, are all immutable. Likewise, web parts tend to be “chunks” of code that are not easy to change, unless your back-end devs have decided to create custom web parts.
+                    </p>
+
+                    <p>
+                        However, everything else is fair game. As far as your actual master pages and page layouts go, as long as all the “necessary bits” are there, you’re free to go wild with the remaining HTML. Being a front-end developer means you’re probably champing at the bit to convert your Sharepoint pages to modern, standards-compliant HTML5, right? Well you’re in luck! A gentleman by the name of Kyle Schaeffer has created an HTML5-based responsive master page for Sharepoint 2010:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://kyleschaeffer.com/sharepoint/v5-responsive-html5-master-page/" target="_blank">http://kyleschaeffer.com/sharepoint/v5-responsive-html5-master-page/</a>
+                    </div>
+
+                    <p>
+                        It’s a great first step for updating Sharepoint’s ancient HTML. You may or may not use all of it (I actually tend to forego the CSS and simply use a Sharepoint CSS reset and HTML5 Boilerplate’s CSS, which we’ll cover shortly), but as far as the HTML itself goes, it’s a nice foundation that will make your code much more tolerable, as well as give you the confidence that you’re not missing any essential Web Forms code or ASP/Sharepoint controls. I highly recommend it.
+                    </p>
+
+                    <p>
+                        Once again, keep in mind that the majority (or all) of your users will be using IE to access your Sharepoint site, so utilize fallbacks and shims for HTML5 as needed.
+                    </p>
+                </section>
+
+                <section>
+                    <h5>Front-end Tips & Tricks: CSS</h5>
+
+                    <div class="centered">
+                        <em>Randomly-Generated IDs</em>
+                    </div>
+
+                    <p>
+                        This is another “hands are tied” situation. IDs on HTML elements within a Sharepoint project are typically used for integration with the .NET back-end, not solely as CSS selectors for styling. Luckily, this does mean that you won’t often find these randomly-generated IDs used within Sharepoint’s corev4.css file, as Microsoft did a fairly decent job of separating the .NET structures from the front-end presentational code.
+                    </p>
+
+                    <p>
+                        However, this does also imply something about the way you should be writing your CSS: DON’T rely on these randomly-generated IDs for styling. Just don’t do it. You have no guarantee that their values won’t change, causing all of your styling to disappear at a moment’s notice. A much safer practice is to utilize the “new-ish” CSS paradigm of exclusively using classes for styling, leaving IDs to .NET structures and interactive (JS-integrated) elements.
+                    </p>
+
+                    <div class="centered">
+                        <em>Sharepoint’s Default CSS is More Lengthy than <strong>Atlas Shrugged</strong></em>
+                    </div>
+
+                    <p>
+                        You guessed it: can’t help this one either. Just remember that corev4.css is essential to your site functioning and displaying properly, and that you’ll have to either be writing new, unrelated code and styling that, or overwriting corev4.css in order to arrive at your desired end result. Once again: don’t try to remove corev4.css (or any other included CSS) from your solution.
+                    </p>
+
+                    <div class="centered">
+                        <em>Oh, Yeah, and You HAVE to Use it</em>
+                    </div>
+
+                    <p>
+                        <span class="callout">Hey, we just covered this! Yeah, no shit, but it’s worth reiterating: don’t try to remove Sharepoint’s included front-end assets. Again, this is particularly prominent if you’re deploying to Sharepoint Online, as Microsoft will expect these assets to be present in their original, unaltered format.</span>
+                    </p>
+
+                    <div class="centered">
+                        <em>It’s Ugly</em>
+                    </div>
+
+                    <p>
+                        You’ll find that the CSS utilized by all default Sharepoint structures tends to be fairly horrific to look at. It’s unsemantic, convoluted, redundant, and often uses outdated tactics, rules, and/or properties to achieve its goals. Clearfixes won’t be utilized. Margin will be used instead of padding. Measurement values will be set in pixels instead of ems or percentages. Woe is me.
+                    </p>
+
+                    <p>
+                        Luckily, since you’ll likely be developing a site based on a snazzy, new-school design or branding, you’ll be producing a lot of the site from scratch, including the HTML and CSS. No, you won’t be able to rewrite corev4.css, but you can certainly overwrite its rules with your own.
+                    </p>
+
+                    <p>
+                        Producing CSS for brand new page elements won’t be the issue, though; you’ll be able to write proper, standards-compliant, semantic CSS for those elements. The issue will be trying to restyle existing page elements, especially those produced dynamically via Sharepoint or ASP controls. Maybe you need to restyle the Ribbon, or particular web parts, or even system pages.
+                    </p>
+
+                    <p>
+                        Some people like to take a precise, surgical approach, targeting individual DOM elements (often nested within others) and overwriting individual rules as necessary. While this will certainly result in less code and will be a bit cleaner, I can say with confidence that this approach will waste a boatload of your time and often frustrate you. Instead, I personally prefer a bit of a shotgun approach. For instance, say I want to reset the margins and padding on all nested elements within the parent Ribbon element:
+                    </p>
+
+                    <div class="centered">
+                        <strong>body #s4-ribbonrow * { margin: 0; padding: 0; }</strong>
+                    </div>
+
+                    <p>
+                        That’s right: it’s our old friend, the asterisk selector. “No!” you shout, interrupting my poignant and interesting explanation. “The asterisk selector is so slow!” Yes, you’re right, it is. I know that; you know that; we all know that. The thing is that it honestly just makes things a lot faster for you. You’ll frequently find elements buried numerous nodes deep, and will be completely at a loss as to why a rule is (or isn’t) helping you achieve a certain goal. Sometimes, it’s just better to start from a clean slate. Use the asterisk wisely and it can be an extremely helpful tool.
+                    </p>
+
+                    <div class="centered">
+                        <em>It’s Redundant</em>
+                    </div>
+
+                    <p>
+                        In addition to the last bullet point, the asterisk can help deal with some of the redundancy found within corev4.css’s rules. As long as you’re wiping out all of a parent element’s childrens’ properties, it should be easier to arrive at a clean slate, in order to ultimately build the rules back up again yourself.
+                    </p>
+
+                    <p>
+                        One important thing to note is that you’ll have to ensure your CSS loads after corev4.css, so that your fresh new rules aren’t prematurely overwritten by corev4. In order to achieve this, make use of the CssRegistration Sharepoint control with one special attribute:
+                    </p>
+
+                    <div class="centered">
+                        <strong>&#60;SharePoint:CssRegistration Name="/Style Library/[project name]/css/style.css" runat="server" After="corev4.css"/></strong>
+                    </div>
+
+                    <p>
+                        The “After” attribute will ensure your CSS file gets loaded after corev4.css during page rendering, so it’s imperative that you use it.
+                    </p>
+
+                    <p>
+                        Oh, and don’t forget about the “!important” declaration. It can be a lifesaver when you simply can’t seem to properly overwrite existing rules on an element. Use it sparingly, but always remember it’s there for your use.
+                    </p>
+
+                    <p>
+                        One last thing: it’s interesting to note that Sharepoint uses a Sharepoint control (CssRegistration) to reference CSS files, but doesn’t use one to load JS files. You can use the standard &#60;script> tag as you’re used to. Odd, eh?
+                    </p>
+                </section>
+
+                <section>
+                    <h5>Front-end Tips & Tricks: JS</h5>
+
+                    <div class="centered">
+                        <em>It’s Untouchable</em>
+                    </div>
+
+                    <p>
+                        This is getting repetitive, isn’t it? Once again, just don’t touch it. Don’t try to edit it. Don’t try to remove it. <a href="http://www.youtube.com/watch?v=kHmvkRoEowc" target="_blank">LEAVE SHAREPOINT’S JS ALONE</a>!!!
+                    </p>
+
+                    <p>
+                        Even more so than Sharepoint’s CSS, its JS can neither be edited, removed, or overwritten. It’s necessary for the proper function of Sharepoint. If you find that your handwritten JS or any JS libraries you’re using end up causing Sharepoint to throw strange, archaic errors, you can safely assume that something you have included or written is the cause, and will have to be resolved for the site to function properly. Sharepoint’s JS is a black box - things go in, things come out, but you can’t touch it.
+                    </p>
+
+                    <div class="centered">
+                        <em>It Clashes with Other JS Libraries</em>
+                    </div>
+
+                    <p>
+                        As long as you have researched the libraries/toolkits you intend to use and are confident they won’t clash with Sharepoint’s JS, you should be in good shape. Obviously this will likely require some trial-and-error to ensure that, indeed, things aren’t tossing any errors. If they’re not, then the onus is on you to write your necessary JS using these libraries and ensure your code isn’t mucking things up.
+                    </p>
+
+                    <p>
+                        If you’re like me, you’re a big fan of tools that allow you to edit your code, save it, and see your changes instantly reflected in the browser, even without a manual page refresh. Mac users will recognize this functionality from apps like Codekit, and LiveReload performs a similar function. Unfortunately, since we’re working in a Windows VM, Codekit isn’t an option, and LiveReload on Windows is shaky at best. However, there is another option that has worked well for me on Sharepoint projects:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://livejs.com/" target="_blank">http://livejs.com/</a>
+                    </div>
+
+                    <p>
+                        Live.js will allow you to make changes to both your CSS and JS and see the changes instantly reflected in your browser. Unfortunately, it’s not as reliable for HTML, as much of our pages are comprised of Sharepoint or ASP controls that get rendered at runtime. Still, two out of three ain’t bad! In my experience, it also works well in conjunction with Sharepoint’s JS, so potential JS errors are a non-issue.
+                    </p>
+
+                    <p>
+                        One caveat: remember to remove Live.js (or at least comment it out) before deployment or testing. It can cause funky things to happen with the browser, including non-stop page refreshes, which are obviously pretty undesirable for the end-user.
+                    </p>
+
+                    <p>
+                        If Live.js doesn’t work out for you, text editors/IDEs often have extensions for instant reload, if you’ve taken the route of working out of the “layouts” folder and using an external editor aside from Visual Studio. I’m a Sublime Text user myself, and there’s an extension for LiveReload that bypasses the need to install the Windows version of LiveReload:
+                    </p>
+
+                    <div class="centered">
+                        <a href="https://github.com/dz0ny/LiveReload-sublimetext2" target="_blank">https://github.com/dz0ny/LiveReload-sublimetext2</a>
+                    </div>
+
+                    <p>
+                        It’s worth a shot if you’re desperate.
+                    </p>
+                </section>
+            </article>
+
+            <article>
+                <header class="centered">
+                    <h3>Seventh Circle</h3>
+                    <h4>Violence</h4>
+
+                    <h6><a href="#">back to top</a></h6>
+                </header>
+
+                <section>
+                    <p>
+                        I bet you feel empowered right now, don’t you? Where you were previously a weak, terrified little kitten, you’re now a strong, hulking behemoth chock-full of useful knowledge about Sharepoint. You’re ready to tackle the frightening task of front-end Sharepoint development with zeal and candor. Nothing will stop you! Nothing will stand in your way!
+                    </p>
+
+                    <p>
+                        Ahem. More likely, you’re wrapping up this book in relative apathy, shrugging your shoulders and murmuring, “fuckin’ Microsoft.” I can’t blame you. I said the same thing myself not too long ago, realizing the breadth of the task that lie in front of me.
+                    </p>
+
+                    <p>
+                        I sincerely hope this brief book has been able to shed some light on Sharepoint for you in a meaningful, understandable way. Hopefully you now have a solid grasp on what exactly Sharepoint is, as well as what some of its pitfalls are and how to mitigate them to make your task of front-end development on a Sharepoint site as painless as humanly possible.
+                    </p>
+
+                    <p>
+                        I encourage you to send me feedback on this book, whether it be corrections or otherwise. I can be reached via email at the following address:
+                    </p>
+
+                    <div class="centered">
+                        <a href="mailto:jkymarsh@gmail.com" target="_blank">jkymarsh@gmail.com</a>
+                    </div>
+
+                    <p>
+                        Furthermore, I wrote this book entirely in my free time and out of the good of my heart, so if you found it useful, I’d love if you could find it deep inside you to donate a few bucks, which will likely go towards a frosty lager. I’ll even pretend we’re drinking together, chatting like old pals about our trials and tribulations with front-end development! What fun!
+                    </p>
+
+                    <p>
+                        To proceed with said donation or simply to find out more about me and some of my work, please take a gander at:
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://jkymarsh.com/" target="_blank">http://jkymarsh.com/</a>
+                    </div>
+
+                    <p>
+                        Thanks for reading, and godspeed.
+                    </p>
+                </section>
+            </article>
+
+            <article>
+                <header class="centered">
+                    <h3>About the Author</h3>
+
+                    <h6><a href="#">back to top</a></h6>
+                </header>
+
+                <section>
+                    <p>
+                        I’m a front-end developer currently living in windy Chicago, Illinois. I’m passionate about Javascript, web standards, and writing clean, maintainable, well-documented code. Though front-end development is my forte and area of expertise, I also have experience with .NET, PHP, Ruby, and Python.
+                    </p>
+
+                    <p>
+                        I graduated from Northern Illinois University in 2009 with a Bachelor’s in Music (wat), with emphases on composition and audio engineering. My first forays into programming began in high school with Python and various web technologies, eventually evolving into C++, Fortran, and MaxMSP/Puredata in college. By the grace of god, I eventually stumbled into the realm of modern web development and it’s been smooth sailing ever since.
+                    </p>
+
+                    <p>
+                        I’m also deeply in love with music (metalcore/hardcore, skramz, shoegaze, indie, idm), tattoo culture, video games, and horror books and movies. I consider myself to be an outspoken advocate of atheism and logic, and can often be found ranting about such things on Twitter.
+                    </p>
+
+                    <p>
+                        Feel free to check out my website and Github account, as well as spark up a conversation via Twitter or email. I’m frequently looking for new projects and contracts, both local and remote, so you’re encouraged to drop me a line.
+                    </p>
+
+                    <div class="centered">
+                        <a href="http://jkymarsh.com/" target="_blank">http://jkymarsh.com/</a> |
+                        <a href="https://github.com/jkymarsh" target="_blank">https://github.com/jkymarsh</a> |
+                        <a href="https://twitter.com/jkymarsh" target="_blank">https://twitter.com/jkymarsh</a>
+                    </div>
                 </section>
             </article>
         </div>
